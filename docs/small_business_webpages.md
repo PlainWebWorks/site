@@ -174,7 +174,7 @@ Deliverables:
 - Create a single-page landing site.
 - Include HTML, CSS, and minimal JS if needed.
 - Use placeholder contact info:
-  Email: hello@plainwebworks.com
+  Email: hello@plainwebworks.co
   Phone: (555) 555-5555
   Service area: Local businesses in Georgia and remote small businesses across the US.
 - Make the code easy to edit later.
