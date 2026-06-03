@@ -23,7 +23,7 @@ _Last updated: 2026-06-03_
 | Business email (inbound) | `hello@plainwebworks.co` — Cloudflare Email Routing → personal | Active |
 | Business email (outbound) | Google Workspace — active, landing in spam for now | **Warming up** |
 | Google Voice | (803) 594-2461 | Active |
-| Google Business Profile | Not yet created | Not started |
+| Google Business Profile | Not yet created — post-divorce only | Blocked |
 | Google Search Console | Not yet configured | Not started |
 | Analytics | Not yet configured | Not started |
 
@@ -121,16 +121,16 @@ _Last updated: 2026-06-03_
 ## Launch Sequence (when legal timing clears)
 
 1. Form LLC
-2. Set up real outbound email via Google Workspace (verify domain first)
-3. Confirm Google Voice is active and tested
+2. ~~Set up real outbound email via Google Workspace~~ — done
+3. ~~Confirm Google Voice is active and tested~~ — done, (803) 594-2461
 4. Remove `noindex`/`nofollow` from `index.html`
 5. Update `robots.txt` to allow crawling
-6. Add Google Business Profile
-7. Add Search Console
-8. Add analytics
-9. Add privacy policy and terms pages
-10. Push final site
-11. Run health check — confirm all green
+6. Add Search Console
+7. Add analytics (Cloudflare Web Analytics)
+8. Add privacy policy and terms pages
+9. Push final site
+10. Run health check — confirm all green
+11. Create Google Business Profile
 12. Start calling lead list / join chamber
 
 ---
