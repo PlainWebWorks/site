@@ -1,18 +1,18 @@
-# Mike Hawkes — Business Proposal and Advertisement Draft
+# Plain Web Works — Business Proposal and Advertisement Draft
 
 ## Working Business Name
 
-**Mike Hawkes**
+**Plain Web Works**
 
 ## Plain-English Positioning
 
-**Mike Hawkes helps small local crews build and maintain the backend they need to run like a real business without hiring an IT department.**
+**Plain Web Works helps small local crews build and maintain the backend they need to run like a real business without hiring an IT department.**
 
 The target customer is a 1–10 person local service business: contractor, repair company, landscaper, small shop, solo professional office, or local trade crew. These businesses do not need a full-time IT staff, a bloated managed service provider, or a complicated payment system on their website. They need the basic business plumbing to work.
 
 They need customers to find them, contact them, request work, leave reviews, and trust that the business is real.
 
-Mike Hawkes provides that backend.
+Plain Web Works provides that backend.
 
 
 
@@ -22,7 +22,7 @@ Mike Hawkes provides that backend.
 
 Small local businesses often lose money because their technical backend is duct-taped together. Their website is outdated or nonexistent. Their Google listing is wrong. Their email is personal Gmail. Their customer intake happens through texts, Facebook messages, voicemails, Angi leads, and random scraps of paper. Reviews go unanswered. Quote requests get missed. Passwords are shared. Devices break. Nobody owns the process.
 
-Mike Hawkes exists to fix that problem.
+Plain Web Works exists to fix that problem.
 
 The company provides practical technology, web, and workflow support for small local businesses that are too small to justify internal IT staff but too dependent on technology to keep winging it.
 
@@ -76,7 +76,7 @@ The business owner does not want a lecture. They want the mess handled.
 
 ## 4. Proposed Solution
 
-Mike Hawkes provides a practical backend for small local businesses.
+Plain Web Works provides a practical backend for small local businesses.
 
 That backend can include:
 
@@ -203,7 +203,7 @@ No unlimited support unless priced as a real retainer.
 
 ## 6. Important Boundaries
 
-Mike Hawkes should avoid unnecessary liability by keeping early services simple and clean.
+Plain Web Works should avoid unnecessary liability by keeping early services simple and clean.
 
 ### Payment Boundary
 
@@ -233,9 +233,9 @@ Every engagement should say exactly what is included and what is not included.
 
 Avoid open-ended “handle all IT forever” promises.
 
-## 7. Why Mike Hawkes
+## 7. Why Plain Web Works
 
-Mike Hawkes has a rare background that combines local IT support, hospital technology leadership, automation, cybersecurity, reverse engineering, networking, and practical troubleshooting.
+Plain Web Works has a rare background that combines local IT support, hospital technology leadership, automation, cybersecurity, reverse engineering, networking, and practical troubleshooting.
 
 The useful customer-facing version:
 
@@ -265,14 +265,14 @@ Expanded version:
 
 When someone searches your name, trade, and area, they should land on your website, your phone number, your photos, your reviews, and your quote form. If they land on a marketplace instead, you are renting access to your own customer.
 
-Mike Hawkes helps fix that.
+Plain Web Works helps fix that.
 
 ## 9. First-Month Build Plan
 
 ### Week 1 — Build the Offer
 
-- Choose final business name later; use Mike Hawkes for now.
-- Build one-page website for Mike Hawkes.
+- Choose final business name later; use Plain Web Works for now.
+- Build one-page website for Plain Web Works.
 - Build a sample contractor website.
 - Build a quote-request form demo.
 - Build a sample monthly review/lead report.
@@ -382,7 +382,7 @@ Small local businesses do not need bloated IT contracts.
 
 They need customers to find them, contact them, request work, and leave reviews without everything turning into a mess of texts, voicemails, Facebook messages, Angi leads, broken websites, and forgotten passwords.
 
-**Mike Hawkes helps small crews build the backend that keeps work moving.**
+**Plain Web Works helps small crews build the backend that keeps work moving.**
 
 Services include:
 
@@ -412,13 +412,13 @@ The goal is simple:
 
 **When someone Googles your name, service, and area, they should find you — not a lead platform charging you for the customer.**
 
-Mike Hawkes helps you own that path.
+Plain Web Works helps you own that path.
 
 ## Short Ad Version
 
 **Small business tech without the corporate nonsense.**
 
-Mike Hawkes helps local contractors, crews, and small offices set up the backend they actually need: websites, quote forms, Google listing cleanup, review monitoring, business email, social media basics, and break/fix tech support.
+Plain Web Works helps local contractors, crews, and small offices set up the backend they actually need: websites, quote forms, Google listing cleanup, review monitoring, business email, social media basics, and break/fix tech support.
 
 If customers find you through Angi, Facebook, word of mouth, or random text messages, it may be time to own the pipeline yourself.
 
@@ -432,7 +432,7 @@ Local contractors and small crews: stop letting lead platforms own your customer
 
 I help set up simple websites, quote forms, Google Business Profile cleanup, review monitoring, business email, and basic tech support so customers can find you directly and request work without the usual mess.
 
-**Mike Hawkes — small business backend support for local crews.**
+**Plain Web Works — small business backend support for local crews.**
 
 ## First Conversation Script
 
@@ -474,11 +474,11 @@ If they do not land on you, that can be fixed.
 
 # One-Page Capability Statement
 
-## Mike Hawkes
+## Plain Web Works
 
 **Small Business Backend Support**
 
-Mike Hawkes helps small local businesses build and maintain the basic technology backend they need to operate professionally without hiring full-time IT staff.
+Plain Web Works helps small local businesses build and maintain the basic technology backend they need to operate professionally without hiring full-time IT staff.
 
 ### Core Services
 
@@ -508,7 +508,7 @@ If your customer pipeline depends entirely on Angi, Facebook, scattered text mes
 
 ### Background
 
-Mike Hawkes brings practical experience in IT support, hospital technology leadership, network administration, automation, federal cybersecurity analysis, malware reverse engineering, account/workflow cleanup, and complex technical troubleshooting.
+Plain Web Works brings practical experience in IT support, hospital technology leadership, network administration, automation, federal cybersecurity analysis, malware reverse engineering, account/workflow cleanup, and complex technical troubleshooting.
 
 That background matters because small-business technology problems are rarely clean. They are usually a mix of broken accounts, missing documentation, bad vendors, weak workflows, forgotten passwords, old devices, scattered intake, and nobody owning the whole system.
 
