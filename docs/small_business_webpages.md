@@ -175,6 +175,6 @@ Deliverables:
 - Include HTML, CSS, and minimal JS if needed.
 - Use placeholder contact info:
   Email: hello@plainwebworks.co
-  Phone: (555) 555-5555
+  Phone: (803) 594-2461
   Service area: Local businesses in Georgia and remote small businesses across the US.
 - Make the code easy to edit later.

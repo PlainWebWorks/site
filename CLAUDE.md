@@ -57,7 +57,7 @@ yamlclients:
     expected_email:
       - contact@example.com
     expected_phone:
-      - "555-555-5555"
+      - "803-594-2461"
     required_text:
       - "Some text that must appear on the page"
     required_links:
@@ -76,5 +76,5 @@ What to Avoid
 
 Do not add dependencies to the marketing site without asking
 Do not refactor working check functions without a clear reason
-Do not generate placeholder phone numbers or emails — (555) 555-5555 and hello@plainwebworks.co are intentional placeholders in the marketing site until real contact info is confirmed
+Do not change the phone number (803) 594-2461 or email hello@plainwebworks.co in the marketing site
 Do not make the site clever — it should be plain, fast, and clear
