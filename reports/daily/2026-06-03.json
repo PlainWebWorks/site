@@ -1,0 +1,131 @@
+{
+  "date": "2026-06-03",
+  "status": "warning",
+  "results": [
+    {
+      "date": "2026-06-03",
+      "checked_at": "2026-06-03T04:28:21.470649+00:00",
+      "client": "Plain Web Works",
+      "domain": "plainwebworks.co",
+      "canonical_url": "https://plainwebworks.co",
+      "launched": true,
+      "status": "warning",
+      "checks": {
+        "dns": {
+          "ok": true,
+          "value": [
+            "104.21.19.91",
+            "172.67.185.181",
+            "2606:4700:3037::6815:135b",
+            "2606:4700:3037::ac43:b9b5"
+          ]
+        },
+        "https_certificate": {
+          "ok": true,
+          "value": {
+            "expires_at": "2026-09-01T00:58:44+00:00",
+            "days_remaining": 89
+          }
+        },
+        "http_to_https": {
+          "ok": true,
+          "value": {
+            "from": "http://plainwebworks.co",
+            "to": "https://plainwebworks.co/",
+            "status": 200
+          }
+        },
+        "http_status": {
+          "ok": true,
+          "value": 200
+        },
+        "response_time_ms": {
+          "ok": true,
+          "value": 20.18
+        },
+        "title": {
+          "ok": true,
+          "value": "Plain Web Works | Small Business Website Setup"
+        },
+        "meta_description": {
+          "ok": true,
+          "value": "Plain Web Works helps small businesses set up domains, websites, business email, Google Business Profile, contact forms, local SEO, analytics, and basic security."
+        },
+        "og_title": {
+          "ok": true,
+          "value": "Plain Web Works"
+        },
+        "og_description": {
+          "ok": true,
+          "value": "We put small businesses online without making it weird."
+        },
+        "json_ld": {
+          "ok": true
+        },
+        "noindex": {
+          "ok": false,
+          "value": true
+        },
+        "nofollow": {
+          "ok": false,
+          "value": true
+        },
+        "robots_blocks_all": {
+          "ok": false,
+          "value": true
+        },
+        "contact_path": {
+          "ok": true,
+          "value": {
+            "email": true,
+            "phone": true
+          }
+        },
+        "required_text": {
+          "ok": true,
+          "value": {
+            "missing": [],
+            "checked": 3
+          }
+        },
+        "required_links": {
+          "ok": true,
+          "value": {
+            "missing": [],
+            "checked": 2
+          }
+        },
+        "configured_paths": {
+          "ok": true,
+          "value": [
+            {
+              "path": "/",
+              "ok": true,
+              "status": 200,
+              "response_time_ms": 20.21
+            },
+            {
+              "path": "/robots.txt",
+              "ok": true,
+              "status": 200,
+              "response_time_ms": 15.67
+            }
+          ]
+        },
+        "internal_links": {
+          "ok": true,
+          "value": {
+            "checked": 0,
+            "problems": []
+          }
+        }
+      },
+      "failed_checks": [
+        "noindex",
+        "nofollow",
+        "robots_blocks_all"
+      ],
+      "notes": []
+    }
+  ]
+}

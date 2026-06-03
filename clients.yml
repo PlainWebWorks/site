@@ -1,0 +1,20 @@
+clients:
+  - name: "Plain Web Works"
+    domain: "plainwebworks.co"
+    canonical_url: "https://plainwebworks.co"
+    launched: true
+    expected_email:
+      - "hello@plainwebworks.co"
+    expected_phone:
+      - "+15555555555"
+      - "(555) 555-5555"
+    required_text:
+      - "Plain Web Works"
+      - "Your business needs more than a Facebook page."
+      - "Free website check"
+    required_links:
+      - "mailto:hello@plainwebworks.co"
+      - "tel:+15555555555"
+    check_paths:
+      - "/"
+      - "/robots.txt"

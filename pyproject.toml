@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plainwebworks-healthcheck"
+version = "0.1.0"
+description = "Public-surface website health checks for Plain Web Works clients."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "beautifulsoup4>=4.12",
+  "PyYAML>=6.0",
+  "requests>=2.31",
+]
+
+[project.scripts]
+plainwebworks-healthcheck = "plainwebworks_healthcheck.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
