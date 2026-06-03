@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plain Web Works — Capability Statement</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17211d;
+      background: #e8e8e4;
+      padding: 0.4in 0;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.18);
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #17211d;
+      color: #fff;
+      padding: 0.5in 0.6in 0.48in;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.28in;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      background: #315f4b;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .headline {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 5.8in;
+    }
+
+    .subhead {
+      margin-top: 0.15in;
+      font-size: 12px;
+      color: rgba(255,255,255,0.76);
+      max-width: 5.2in;
+      line-height: 1.6;
+    }
+
+    /* ── Body ── */
+    .body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 0.44in 0.6in 0.38in;
+      gap: 0;
+      align-items: start;
+    }
+
+    .col-left {
+      padding-right: 0.38in;
+      border-right: 1px solid #d8ddd5;
+    }
+
+    .col-right {
+      padding-left: 0.38in;
+    }
+
+    .section-label {
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #5b6861;
+      margin-bottom: 0.13in;
+    }
+
+    /* Services list */
+    .services {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .services li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .services li::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #315f4b;
+      flex-shrink: 0;
+      margin-top: 3.5px;
+    }
+
+    .who-its-for {
+      margin-top: 0.22in;
+      padding-top: 0.18in;
+      border-top: 1px solid #d8ddd5;
+    }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 10px;
+      margin-top: 0.1in;
+    }
+
+    .who-grid span {
+      font-size: 10.5px;
+      color: #3d4f47;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .who-grid span::before {
+      content: '→';
+      color: #d89b45;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Free snapshot box */
+    .snapshot-box {
+      background: #f0f7f3;
+      border: 1.5px solid rgba(49,95,75,0.28);
+      border-radius: 8px;
+      padding: 0.22in 0.2in 0.2in;
+    }
+
+    .snapshot-box .section-label {
+      color: #315f4b;
+    }
+
+    .snapshot-title {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #17211d;
+      margin-bottom: 0.1in;
+    }
+
+    .snapshot-desc {
+      font-size: 11px;
+      color: #3d5249;
+      line-height: 1.6;
+      margin-bottom: 0.14in;
+    }
+
+    .snapshot-includes {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .snapshot-includes li {
+      font-size: 11px;
+      color: #3d5249;
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      line-height: 1.35;
+    }
+
+    .snapshot-includes li::before {
+      content: '✓';
+      color: #315f4b;
+      font-weight: 900;
+      flex-shrink: 0;
+      font-size: 10px;
+      margin-top: 1px;
+    }
+
+    .no-obligation {
+      margin-top: 0.16in;
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #315f4b;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    /* Ownership note */
+    .ownership-note {
+      margin-top: 0.22in;
+      background: #17211d;
+      color: rgba(255,255,255,0.85);
+      border-radius: 7px;
+      padding: 0.15in 0.17in;
+      font-size: 10.5px;
+      line-height: 1.55;
+    }
+
+    .ownership-note strong {
+      display: block;
+      color: #d89b45;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: #17211d;
+      color: rgba(255,255,255,0.82);
+      padding: 0.2in 0.6in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-item {
+      font-size: 11.5px;
+    }
+
+    .footer-item strong {
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #d89b45;
+      margin-bottom: 2px;
+    }
+
+    /* ── Print ── */
+    @media print {
+      @page { size: letter; margin: 0; }
+      body { background: #fff; padding: 0; }
+      .page { width: 8.5in; min-height: 11in; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <span class="brand-name">Plain Web Works</span>
+      </div>
+      <h1 class="headline">Your business needs more than a Facebook page.</h1>
+      <p class="subhead">
+        We handle the internet basics local businesses actually need — a real domain,
+        a clean website, business email, Google listing, contact forms, and the setup
+        that keeps customers finding you instead of a lead platform charging you for them.
+      </p>
+    </header>
+
+    <div class="body">
+
+      <div class="col-left">
+        <p class="section-label">What we handle</p>
+        <ul class="services">
+          <li>Domain registration and cleanup</li>
+          <li>Simple mobile-friendly website</li>
+          <li>Business email setup</li>
+          <li>Google Business Profile setup</li>
+          <li>Contact and quote request forms</li>
+          <li>Local SEO basics</li>
+          <li>Analytics and Search Console</li>
+          <li>Email security (SPF, DKIM, DMARC)</li>
+          <li>Monthly maintenance and health checks</li>
+        </ul>
+
+        <div class="who-its-for">
+          <p class="section-label">Who this is for</p>
+          <div class="who-grid">
+            <span>Contractors</span>
+            <span>HVAC and plumbing</span>
+            <span>Landscapers</span>
+            <span>Auto and repair shops</span>
+            <span>Handymen</span>
+            <span>Barbers and salons</span>
+            <span>Small offices</span>
+            <span>Churches and nonprofits</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-right">
+        <div class="snapshot-box">
+          <p class="section-label">Free offer</p>
+          <p class="snapshot-title">Free Local Business<br>Website Check</p>
+          <p class="snapshot-desc">
+            We look at your current web presence and give you a plain-English
+            report of what is broken, what matters, and what can wait.
+            No charge. No obligation.
+          </p>
+          <ul class="snapshot-includes">
+            <li>Website and mobile layout review</li>
+            <li>Google listing check</li>
+            <li>Domain and email setup review</li>
+            <li>Contact path test</li>
+            <li>Written findings in plain English</li>
+          </ul>
+          <p class="no-obligation">Free &middot; No obligation &middot; No tech jargon</p>
+        </div>
+
+        <div class="ownership-note">
+          <strong>No lock-in</strong>
+          You own your domain, your accounts, and your website.
+          We set things up so you can hand them off or walk away at any time.
+          No hostage websites.
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <!-- Update phone once Google Voice number is set up -->
+      <div class="footer-item">
+        <strong>Email</strong>
+        hello@plainwebworks.co
+      </div>
+      <div class="footer-item">
+        <strong>Phone</strong>
+        (555) 555-5555
+      </div>
+      <div class="footer-item">
+        <strong>Web</strong>
+        plainwebworks.co
+      </div>
+      <div class="footer-item">
+        <strong>Service area</strong>
+        Georgia &amp; US remote
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
