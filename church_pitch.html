@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Greenwood Baptist Church — Digital Presence Proposal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17211d;
+      background: #e8e8e4;
+      padding: 0.4in 0;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 6px 40px rgba(0,0,0,0.18);
+    }
+
+    .header {
+      padding: 0.45in 0.6in 0.38in;
+      border-bottom: 1px solid #d8ddd5;
+      border-left: 6px solid #315f4b;
+    }
+
+    .church-name {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #315f4b;
+      margin-bottom: 0.1in;
+    }
+
+    .headline {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #17211d;
+      max-width: 6in;
+    }
+
+    .subhead {
+      margin-top: 0.12in;
+      font-size: 12px;
+      color: #5b6861;
+      line-height: 1.65;
+      max-width: 5.8in;
+    }
+
+    .body {
+      flex: 1;
+      padding: 0.38in 0.6in 0.32in;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3in;
+      align-items: start;
+    }
+
+    .col-left { }
+    .col-right { }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #5b6861;
+      margin-bottom: 0.1in;
+    }
+
+    .problem-box {
+      background: #fdf6ee;
+      border-left: 3px solid #d89b45;
+      border-radius: 0 4px 4px 0;
+      padding: 0.16in 0.18in;
+      margin-bottom: 0.22in;
+    }
+
+    .problem-box p {
+      font-size: 11px;
+      line-height: 1.65;
+      color: #4a3a1a;
+    }
+
+    .problem-box p + p {
+      margin-top: 8px;
+    }
+
+    .item-list {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+
+    .item-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #17211d;
+    }
+
+    .item-list li .icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #315f4b;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .item-list li strong {
+      display: block;
+      font-weight: 700;
+      color: #17211d;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #d8ddd5;
+      margin: 0.18in 0;
+    }
+
+    .cost-box {
+      background: #f0f7f3;
+      border: 1.5px solid rgba(49,95,75,0.28);
+      border-radius: 8px;
+      padding: 0.18in 0.2in;
+      margin-bottom: 0.18in;
+    }
+
+    .cost-box .section-label {
+      color: #315f4b;
+    }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11.5px;
+      margin-top: 8px;
+    }
+
+    .cost-row .item { font-weight: 600; color: #17211d; }
+    .cost-row .amount { font-weight: 800; color: #315f4b; }
+    .cost-row .amount.free { font-size: 13px; }
+
+    .cost-note {
+      margin-top: 0.1in;
+      font-size: 10px;
+      color: #5b6861;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .ownership-box {
+      border-left: 3px solid #315f4b;
+      border-radius: 0 4px 4px 0;
+      padding: 0.12in 0.16in;
+      background: #fff;
+      margin-bottom: 0.18in;
+    }
+
+    .ownership-box .section-label { color: #315f4b; }
+
+    .ownership-box p {
+      font-size: 11px;
+      line-height: 1.65;
+      color: #3d4f47;
+      margin-top: 6px;
+    }
+
+    .youtube-box {
+      background: #fff8f0;
+      border: 1.5px solid rgba(216,155,69,0.35);
+      border-radius: 8px;
+      padding: 0.16in 0.18in;
+    }
+
+    .youtube-box .section-label { color: #a06b1a; }
+
+    .youtube-box p {
+      font-size: 11px;
+      line-height: 1.65;
+      color: #4a3510;
+      margin-top: 6px;
+    }
+
+    .footer {
+      background: #fff;
+      border-top: 2px solid #315f4b;
+      padding: 0.15in 0.6in;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-item {
+      font-size: 11px;
+      color: #17211d;
+    }
+
+    .footer-item strong {
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #315f4b;
+      margin-bottom: 2px;
+    }
+
+    @media print {
+      @page { size: letter; margin: 0; }
+      body { background: #fff; padding: 0; }
+      .page { width: 8.5in; min-height: 11in; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <p class="church-name">Greenwood Baptist Church — Digital Presence Proposal</p>
+      <h1 class="headline">Your sermons deserve more than a Facebook page.</h1>
+      <p class="subhead">
+        Right now, someone in Lincoln County searching for a church finds nothing for Greenwood Baptist.
+        No website. No Google listing. No phone number online. This proposal outlines how to fix all of that —
+        at no cost to the church — and what that unlocks long term.
+      </p>
+    </header>
+
+    <div class="body">
+
+      <div class="col-left">
+
+        <p class="section-label">The current situation</p>
+        <div class="problem-box">
+          <p>
+            Greenwood Baptist Church exists online only as a directory listing on the Georgia Baptist
+            Association website. That listing has an address and service times — but no phone number,
+            no email, no way for anyone to contact the church directly.
+          </p>
+          <p>
+            Sermons are posted to Facebook, which means they are only visible to people already on
+            Facebook, and they disappear into a feed. They are not searchable. They are not permanent.
+            They do not reach anyone outside the congregation.
+          </p>
+        </div>
+
+        <hr class="divider">
+
+        <p class="section-label">What gets set up</p>
+        <ul class="item-list">
+          <li>
+            <span class="icon">1</span>
+            <div>
+              <strong>greenwood-baptist.com</strong>
+              A clean, simple website with service times, location, contact information, and a brief description of the church. Mobile-friendly and fast.
+            </div>
+          </li>
+          <li>
+            <span class="icon">2</span>
+            <div>
+              <strong>Church email address</strong>
+              A professional address like pastor@greenwood-baptist.com that belongs to the church — not to any individual.
+            </div>
+          </li>
+          <li>
+            <span class="icon">3</span>
+            <div>
+              <strong>Google Business Profile</strong>
+              Greenwood Baptist appears when someone searches for churches in the area. Shows hours, address, phone, and links to the website.
+            </div>
+          </li>
+          <li>
+            <span class="icon">4</span>
+            <div>
+              <strong>YouTube channel for sermons</strong>
+              Sermons posted to YouTube are searchable, permanent, and reachable by anyone — including members who miss a Sunday and family outside the area.
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="col-right">
+
+        <div class="cost-box">
+          <p class="section-label">Cost to the church</p>
+          <div class="cost-row">
+            <span class="item">Domain (greenwood-baptist.com)</span>
+            <span class="amount free">$0</span>
+          </div>
+          <div class="cost-row">
+            <span class="item">Google Workspace (email, Drive, Meet)</span>
+            <span class="amount free">$0</span>
+          </div>
+          <div class="cost-row">
+            <span class="item">Website setup and design</span>
+            <span class="amount free">$0</span>
+          </div>
+          <div class="cost-row">
+            <span class="item">Google Business Profile setup</span>
+            <span class="amount free">$0</span>
+          </div>
+          <div class="cost-row">
+            <span class="item">YouTube nonprofit channel setup</span>
+            <span class="amount free">$0</span>
+          </div>
+          <p class="cost-note">
+            Google provides free Workspace accounts to verified 501(c)(3) organizations through
+            the Google for Nonprofits program. The domain is being donated as a gift to the church.
+            Ongoing domain renewal is approximately $10 per year.
+          </p>
+        </div>
+
+        <div class="ownership-box">
+          <p class="section-label">The church owns everything</p>
+          <p>
+            The domain, the email accounts, the website, and every Google account are registered
+            to Greenwood Baptist Church — not to any individual. If leadership changes, if a
+            new pastor comes, if the church ever wants to manage this independently, everything
+            transfers cleanly. No mystery logins. No dependency on one person.
+          </p>
+          <p style="margin-top:8px;">
+            In return, permission is requested to reference the church's website as an example
+            of work done by Plain Web Works — a local small business web service.
+          </p>
+        </div>
+
+        <div class="youtube-box">
+          <p class="section-label">A note on sermons and YouTube</p>
+          <p>
+            Facebook keeps content inside Facebook. A sermon posted there is invisible to anyone
+            not already in the congregation. YouTube is indexed by Google — a sermon posted
+            there can be found by anyone searching, watched by family members across the country,
+            and shared outside the church community. The YouTube Nonprofit Program also allows
+            the church to add a donation button directly to videos.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div class="footer-item">
+        <strong>Prepared by</strong>
+        Plain Web Works
+      </div>
+      <div class="footer-item">
+        <strong>Contact</strong>
+        hello@plainwebworks.co
+      </div>
+      <div class="footer-item">
+        <strong>Phone</strong>
+        (803) 594-2461
+      </div>
+      <div class="footer-item">
+        <strong>Web</strong>
+        plainwebworks.co
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
