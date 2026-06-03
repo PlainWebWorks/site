@@ -21,8 +21,8 @@ _Last updated: 2026-06-03_
 | Hosting | Cloudflare Pages — auto-deploys from `main` | Active |
 | GitHub repo | `kain2749/business_model` | Active |
 | Business email (inbound) | `hello@plainwebworks.co` — Cloudflare Email Routing → personal | Active |
-| Business email (outbound) | Google Workspace — domain verification pending | **Pending DNS** |
-| Google Voice | (803) 594-2461 — ID verification pending | **Pending verify** |
+| Business email (outbound) | Google Workspace — active, landing in spam for now | **Warming up** |
+| Google Voice | (803) 594-2461 | Active |
 | Google Business Profile | Not yet created | Not started |
 | Google Search Console | Not yet configured | Not started |
 | Analytics | Not yet configured | Not started |
@@ -33,8 +33,9 @@ _Last updated: 2026-06-03_
 
 - Google Workspace domain verification TXT record needs to be added in Cloudflare DNS panel if not already done.
 - Once the TXT record is in Cloudflare, wait 10–15 minutes then retry verification in Workspace.
-- Cloudflare sometimes caches failed DNS checks — give it time before hitting "verify again."
-- SPF, DKIM, DMARC records for Workspace need to be added after verification completes. Until then, outbound email from `hello@plainwebworks.co` will land in spam.
+- Workspace domain verified and outbound email active as of 2026-06-03.
+- Email currently landing in spam on first contact — mark as not junk to train the filter. Testing deliverability with a non-technical recipient (~2026-06-06) to confirm it sticks.
+- New domain/IP has no sending reputation yet. Spam classification should improve over days/weeks as the domain warms up. SPF, DKIM, DMARC being in place helps — give it time.
 
 ---
 
