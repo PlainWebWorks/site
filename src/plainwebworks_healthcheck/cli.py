@@ -19,6 +19,7 @@ from bs4 import BeautifulSoup
 
 DEFAULT_TIMEOUT_SECONDS = 12
 CERT_EXPIRY_WARNING_DAYS = 30
+ERROR_LEVEL_CHECKS = frozenset({"dns", "http_status", "configured_paths"})
 
 
 @dataclass
@@ -222,46 +223,53 @@ def fetch_robots(session: requests.Session, canonical_url: str, timeout: int) ->
 
 
 def check_client(client: dict[str, Any], timeout: int) -> dict[str, Any]:
-  name = client["name"]
   domain = client["domain"]
   canonical_url = client["canonical_url"]
   launched = bool(client.get("launched", True))
-  session = requests.Session()
-  session.headers.update({"User-Agent": "PlainWebWorksHealthcheck/0.1"})
 
-  checks: dict[str, CheckResult] = {
-    "dns": check_dns(domain),
-    "https_certificate": check_https_certificate(domain),
-    "http_to_https": check_http_to_https(session, domain, canonical_url, timeout),
-  }
+  with requests.Session() as session:
+    session.headers.update({"User-Agent": "PlainWebWorksHealthcheck/0.1"})
 
-  response, elapsed_ms, error = fetch_url(session, canonical_url, timeout)
-  if error or response is None:
-    checks["http_status"] = CheckResult(False, note=error)
-    checks["response_time_ms"] = CheckResult(False)
+    checks: dict[str, CheckResult] = {
+      "dns": check_dns(domain),
+      "https_certificate": check_https_certificate(domain),
+      "http_to_https": check_http_to_https(session, domain, canonical_url, timeout),
+    }
+
+    response, elapsed_ms, error = fetch_url(session, canonical_url, timeout)
+    if error or response is None:
+      checks["http_status"] = CheckResult(False, note=error)
+      checks["response_time_ms"] = CheckResult(False)
+      return build_client_result(client, checks)
+
+    checks["http_status"] = CheckResult(response.status_code == 200, response.status_code)
+    checks["response_time_ms"] = CheckResult(elapsed_ms is not None and elapsed_ms < 3000, elapsed_ms)
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    page_text = soup.get_text(" ", strip=True)
+    robots_text = fetch_robots(session, canonical_url, timeout)
+
+    checks.update(check_page_metadata(soup))
+    checks.update(check_indexing(soup, robots_text, launched))
+    checks["contact_path"] = check_contact_path(client, soup, page_text)
+    checks["required_text"] = check_required_text(client.get("required_text") or [], page_text)
+    checks["required_links"] = check_required_links(client.get("required_links") or [], soup)
+    checks["configured_paths"] = check_paths(session, canonical_url, client.get("check_paths") or ["/"], timeout)
+    checks["internal_links"] = check_internal_links(session, canonical_url, soup, timeout)
+
     return build_client_result(client, checks)
-
-  checks["http_status"] = CheckResult(response.status_code == 200, response.status_code)
-  checks["response_time_ms"] = CheckResult(elapsed_ms is not None and elapsed_ms < 3000, elapsed_ms)
-
-  soup = BeautifulSoup(response.text, "html.parser")
-  page_text = soup.get_text(" ", strip=True)
-  robots_text = fetch_robots(session, canonical_url, timeout)
-
-  checks.update(check_page_metadata(soup))
-  checks.update(check_indexing(soup, robots_text, launched))
-  checks["contact_path"] = check_contact_path(client, soup, page_text)
-  checks["required_text"] = check_required_text(client.get("required_text") or [], page_text)
-  checks["required_links"] = check_required_links(client.get("required_links") or [], soup)
-  checks["configured_paths"] = check_paths(session, canonical_url, client.get("check_paths") or ["/"], timeout)
-  checks["internal_links"] = check_internal_links(session, canonical_url, soup, timeout)
-
-  return build_client_result(client, checks)
 
 
 def build_client_result(client: dict[str, Any], checks: dict[str, CheckResult]) -> dict[str, Any]:
   failed = [name for name, result in checks.items() if not result.ok]
   notes = [f"{name}: {result.note}" for name, result in checks.items() if result.note]
+
+  if any(name in ERROR_LEVEL_CHECKS for name in failed):
+    status = "error"
+  elif failed:
+    status = "warning"
+  else:
+    status = "healthy"
 
   return {
     "date": date.today().isoformat(),
@@ -270,7 +278,7 @@ def build_client_result(client: dict[str, Any], checks: dict[str, CheckResult]) 
     "domain": client["domain"],
     "canonical_url": client["canonical_url"],
     "launched": bool(client.get("launched", True)),
-    "status": "healthy" if not failed else "warning",
+    "status": status,
     "checks": {name: result.to_json() for name, result in checks.items()},
     "failed_checks": failed,
     "notes": notes,
@@ -280,9 +288,11 @@ def build_client_result(client: dict[str, Any], checks: dict[str, CheckResult]) 
 def write_results(results: list[dict[str, Any]], output_dir: Path) -> Path:
   output_dir.mkdir(parents=True, exist_ok=True)
   path = output_dir / f"{date.today().isoformat()}.json"
+  statuses = {result["status"] for result in results}
+  overall = "error" if "error" in statuses else ("warning" if "warning" in statuses else "healthy")
   payload = {
     "date": date.today().isoformat(),
-    "status": "healthy" if all(result["status"] == "healthy" for result in results) else "warning",
+    "status": overall,
     "results": results,
   }
   path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
