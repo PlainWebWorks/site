@@ -24,8 +24,9 @@ _Last updated: 2026-06-03_
 | Business email (outbound) | Google Workspace — active, landing in spam for now | **Warming up** |
 | Google Voice | (803) 594-2461 | Active |
 | Google Business Profile | Not yet created — post-divorce only | Blocked |
-| Google Search Console | Not yet configured | Not started |
-| Analytics | Not yet configured | Not started |
+| Google Search Console | Post-launch — no value on a noindex site | Blocked |
+| Cloudflare Web Analytics | Active — 24 views, 11 visits as of 2026-06-03 | Active |
+| Google Analytics | Not needed yet — revisit post-launch if Cloudflare isn't enough | Backlog |
 
 ---
 
