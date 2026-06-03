@@ -1,0 +1,14 @@
+Before launch:
+- Remove noindex/nofollow
+- Remove robots.txt Disallow
+- Set up real outbound email via Google Workspace or equivalent
+- Add real phone or Google Voice/business number
+- Add privacy policy / terms
+- Add contact form or clear mailto
+- Add Google Business Profile
+- Add Search Console
+- Add Analytics or Cloudflare Web Analytics
+- Test mobile
+- Test email routing
+- Create 3 demo screenshots/examples
+- Build first 50-call local lead list
