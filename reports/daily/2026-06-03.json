@@ -1,15 +1,15 @@
 {
   "date": "2026-06-03",
-  "status": "healthy",
+  "status": "warning",
   "results": [
     {
       "date": "2026-06-03",
-      "checked_at": "2026-06-03T06:00:10.038197+00:00",
+      "checked_at": "2026-06-03T06:26:31.643505+00:00",
       "client": "Plain Web Works",
       "domain": "plainwebworks.co",
       "canonical_url": "https://plainwebworks.co",
       "launched": true,
-      "status": "healthy",
+      "status": "warning",
       "checks": {
         "dns": {
           "ok": true,
@@ -41,7 +41,7 @@
         },
         "response_time_ms": {
           "ok": true,
-          "value": 23.24
+          "value": 27.69
         },
         "title": {
           "ok": true,
@@ -63,16 +63,16 @@
           "ok": true
         },
         "noindex": {
-          "ok": true,
-          "value": false
+          "ok": false,
+          "value": true
         },
         "nofollow": {
-          "ok": true,
-          "value": false
+          "ok": false,
+          "value": true
         },
         "robots_blocks_all": {
-          "ok": true,
-          "value": false
+          "ok": false,
+          "value": true
         },
         "contact_path": {
           "ok": true,
@@ -102,13 +102,13 @@
               "path": "/",
               "ok": true,
               "status": 200,
-              "response_time_ms": 24.9
+              "response_time_ms": 26.37
             },
             {
               "path": "/robots.txt",
               "ok": true,
               "status": 200,
-              "response_time_ms": 14.58
+              "response_time_ms": 21.04
             }
           ]
         },
@@ -120,7 +120,11 @@
           }
         }
       },
-      "failed_checks": [],
+      "failed_checks": [
+        "noindex",
+        "nofollow",
+        "robots_blocks_all"
+      ],
       "notes": []
     }
   ]

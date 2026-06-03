@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import socket
 import ssl
@@ -20,6 +21,144 @@ from bs4 import BeautifulSoup
 DEFAULT_TIMEOUT_SECONDS = 12
 CERT_EXPIRY_WARNING_DAYS = 30
 ERROR_LEVEL_CHECKS = frozenset({"dns", "http_status", "configured_paths"})
+
+CHECK_LABELS: dict[str, str] = {
+  "dns": "Domain resolves",
+  "https_certificate": "SSL certificate",
+  "http_to_https": "HTTP redirects to HTTPS",
+  "http_status": "Site responds",
+  "response_time_ms": "Response time",
+  "title": "Page title",
+  "meta_description": "Meta description",
+  "og_title": "Social share title",
+  "og_description": "Social share description",
+  "json_ld": "Structured data",
+  "noindex": "Visible to search engines",
+  "nofollow": "Links followed by search engines",
+  "robots_blocks_all": "Crawling allowed",
+  "contact_path": "Contact information",
+  "required_text": "Required page text",
+  "required_links": "Required links",
+  "configured_paths": "All pages respond",
+  "internal_links": "Internal links",
+}
+
+CHECK_GROUPS: list[tuple[str, list[str]]] = [
+  ("Availability", ["dns", "https_certificate", "http_to_https", "http_status", "response_time_ms"]),
+  ("Search visibility", ["noindex", "nofollow", "robots_blocks_all"]),
+  ("Page content", ["title", "meta_description", "og_title", "og_description", "json_ld"]),
+  ("Contact and content", ["contact_path", "required_text", "required_links"]),
+  ("Pages and links", ["configured_paths", "internal_links"]),
+]
+
+_REPORT_CSS = """
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  background: #fbfaf6;
+  color: #17211d;
+}
+a { color: inherit; }
+header {
+  background: #17211d;
+  color: #fff;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
+.report-meta { color: rgba(255,255,255,0.6); font-size: 0.88rem; }
+main { max-width: 820px; margin: 0 auto; padding: 32px 24px 64px; }
+.client {
+  background: #fff;
+  border: 1px solid #d8ddd5;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 3px rgba(23,33,29,0.06);
+}
+.client-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.client-header h2 { margin: 0 0 3px; font-size: 1.25rem; }
+.domain { color: #5b6861; font-size: 0.88rem; text-decoration: none; }
+.domain:hover { text-decoration: underline; }
+.badge {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-healthy { background: #315f4b; }
+.badge-warning { background: #b87c1a; }
+.badge-error { background: #a02020; }
+.issues {
+  background: #fff8f0;
+  border: 1px solid #e8c98a;
+  border-radius: 6px;
+  padding: 13px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+.issues-error {
+  background: #fff4f4;
+  border-color: #e8aaaa;
+}
+.issues strong { display: block; margin-bottom: 4px; }
+.issues ul { margin: 0; padding-left: 18px; }
+.issues li { margin-top: 2px; }
+.group { margin-top: 22px; }
+.group-label {
+  margin: 0 0 8px;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5b6861;
+}
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.check {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.check-pass { background: #f3faf5; }
+.check-fail { background: #fdf4f4; }
+.check-icon { font-weight: 900; width: 14px; flex-shrink: 0; font-style: normal; }
+.check-pass .check-icon { color: #315f4b; }
+.check-fail .check-icon { color: #a02020; }
+.check-label { font-weight: 700; flex-shrink: 0; }
+.check-detail { color: #5b6861; margin-left: 2px; word-break: break-word; }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #5b6861;
+  font-size: 0.85rem;
+  border-top: 1px solid #d8ddd5;
+}
+@media (max-width: 600px) {
+  header { padding: 14px 18px; }
+  main { padding: 20px 16px 48px; }
+  .client { padding: 20px; }
+  .client-header { flex-direction: column; }
+}
+"""
 
 
 @dataclass
@@ -299,6 +438,156 @@ def write_results(results: list[dict[str, Any]], output_dir: Path) -> Path:
   return path
 
 
+def _check_detail(name: str, check: dict[str, Any]) -> str:
+  ok = check.get("ok", False)
+  v = check.get("value")
+  note = check.get("note") or ""
+
+  if name == "dns":
+    if ok and isinstance(v, list):
+      return "Resolves to: " + ", ".join(str(a) for a in v)
+    return note or "Lookup failed"
+  if name == "https_certificate":
+    if isinstance(v, dict):
+      days = v.get("days_remaining", "?")
+      expires = (v.get("expires_at") or "")[:10]
+      return f"Expires {expires} · {days} days remaining"
+    return note or ("Valid" if ok else "Check failed")
+  if name == "http_to_https":
+    if isinstance(v, dict):
+      return f"{v.get('from', '')} → {v.get('to', '')}"
+    return note or ""
+  if name == "http_status":
+    return f"HTTP {v}" if v is not None else note or ""
+  if name == "response_time_ms":
+    return f"{v} ms" if v is not None else ""
+  if name == "noindex":
+    return "Visible to search engines" if not v else "Hidden from search engines"
+  if name == "nofollow":
+    return "Links are followed" if not v else "Links marked nofollow"
+  if name == "robots_blocks_all":
+    return "Crawling permitted" if not v else "robots.txt is blocking all crawlers"
+  if name == "contact_path":
+    if isinstance(v, dict):
+      parts = [
+        "Email found" if v.get("email") else "Email not found",
+        "Phone found" if v.get("phone") else "Phone not found",
+      ]
+      return " · ".join(parts)
+    return ""
+  if name == "required_text":
+    if isinstance(v, dict):
+      missing = v.get("missing", [])
+      checked = v.get("checked", 0)
+      return ("Missing: " + ", ".join(missing)) if missing else f"{checked} item(s) present"
+    return ""
+  if name == "required_links":
+    if isinstance(v, dict):
+      missing = v.get("missing", [])
+      checked = v.get("checked", 0)
+      return ("Missing: " + ", ".join(missing)) if missing else f"{checked} link(s) present"
+    return ""
+  if name == "configured_paths":
+    if isinstance(v, list):
+      problems = [p["path"] for p in v if not p.get("ok")]
+      return ("Problems: " + ", ".join(problems)) if problems else f"{len(v)} path(s) responding"
+    return ""
+  if name == "internal_links":
+    if isinstance(v, dict):
+      problems = v.get("problems", [])
+      checked = v.get("checked", 0)
+      if problems:
+        urls = [p.get("url", "") for p in problems]
+        return f"{len(problems)} broken: " + ", ".join(urls)
+      return f"{checked} link(s) checked"
+    return ""
+  if name in ("title", "meta_description", "og_title", "og_description"):
+    return str(v) if v else ""
+  if name == "json_ld":
+    return "Present" if ok else "Not found"
+  return note or ""
+
+
+def _build_html_report(date_str: str, results: list[dict[str, Any]]) -> str:
+  try:
+    display_date = datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %d, %Y")
+  except ValueError:
+    display_date = date_str
+
+  status_labels = {"healthy": "All clear", "warning": "Issues found", "error": "Critical issues"}
+
+  client_blocks: list[str] = []
+  for result in results:
+    client_name = html.escape(result.get("client", ""))
+    domain = html.escape(result.get("domain", ""))
+    canonical_url = html.escape(result.get("canonical_url", ""))
+    status = result.get("status", "healthy")
+    failed = result.get("failed_checks", [])
+    checks = result.get("checks", {})
+
+    badge_label = status_labels.get(status, status)
+    badge_class = f"badge-{status}"
+
+    issues_html = ""
+    if failed:
+      items = "".join(f"<li>{html.escape(CHECK_LABELS.get(f, f))}</li>" for f in failed)
+      box_class = "issues issues-error" if status == "error" else "issues"
+      noun = "Critical issue" if status == "error" else "Issue"
+      plural = "s" if len(failed) > 1 else ""
+      issues_html = f'<div class="{box_class}"><strong>{noun}{plural} found:</strong><ul>{items}</ul></div>'
+
+    groups_html: list[str] = []
+    for group_name, check_names in CHECK_GROUPS:
+      rows: list[str] = []
+      for name in check_names:
+        if name not in checks:
+          continue
+        check = checks[name]
+        ok = check.get("ok", False)
+        label = html.escape(CHECK_LABELS.get(name, name))
+        detail = _check_detail(name, check)
+        icon = "✓" if ok else "✗"
+        row_class = "check check-pass" if ok else "check check-fail"
+        detail_html = f'<span class="check-detail">{html.escape(detail)}</span>' if detail else ""
+        rows.append(f'<li class="{row_class}"><span class="check-icon">{icon}</span><span class="check-label">{label}</span>{detail_html}</li>')
+      if rows:
+        groups_html.append(
+          f'<div class="group"><p class="group-label">{html.escape(group_name)}</p>'
+          f'<ul class="checks">{"".join(rows)}</ul></div>'
+        )
+
+    client_blocks.append(
+      f'<section class="client">'
+      f'<div class="client-header"><div><h2>{client_name}</h2>'
+      f'<a class="domain" href="{canonical_url}" target="_blank" rel="noopener">{domain}</a></div>'
+      f'<span class="badge {badge_class}">{badge_label}</span></div>'
+      f'{issues_html}{"".join(groups_html)}</section>'
+    )
+
+  return (
+    f'<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+    f'<meta charset="utf-8">\n'
+    f'<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+    f'<title>Site Health Report — {html.escape(display_date)}</title>\n'
+    f'<style>{_REPORT_CSS}</style>\n'
+    f'</head>\n<body>\n'
+    f'<header>'
+    f'<span class="brand">Plain Web Works</span>'
+    f'<span class="report-meta">Site Health Report &middot; {html.escape(display_date)}</span>'
+    f'</header>\n'
+    f'<main>{"".join(client_blocks)}</main>\n'
+    f'<footer>Prepared by <a href="https://plainwebworks.co">Plain Web Works</a> &middot; {html.escape(display_date)}</footer>\n'
+    f'</body>\n</html>\n'
+  )
+
+
+def write_report_html(results: list[dict[str, Any]], output_dir: Path) -> Path:
+  output_dir.mkdir(parents=True, exist_ok=True)
+  path = output_dir / f"{date.today().isoformat()}.html"
+  path.write_text(_build_html_report(date.today().isoformat(), results), encoding="utf-8")
+  return path
+
+
 def print_summary(results: list[dict[str, Any]]) -> None:
   for result in results:
     failed = ", ".join(result["failed_checks"]) if result["failed_checks"] else "none"
@@ -323,8 +612,10 @@ def main(argv: list[str] | None = None) -> int:
   print_summary(results)
 
   if not args.no_write:
-    path = write_results(results, args.output_dir)
-    print(f"Wrote {path}")
+    json_path = write_results(results, args.output_dir)
+    html_path = write_report_html(results, args.output_dir)
+    print(f"Wrote {json_path}")
+    print(f"Wrote {html_path}")
 
   return 0 if all(result["status"] == "healthy" for result in results) else 1
 
