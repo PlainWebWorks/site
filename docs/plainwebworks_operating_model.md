@@ -1,8 +1,8 @@
-# Mike Hawkes Operating Model
+# Plain Web Works Operating Model
 
 ## Purpose
 
-This document defines a lightweight operating model for **Mike Hawkes**: a small-business backend support company for 1–10 person local crews.
+This document defines a lightweight operating model for **Plain Web Works**: a small-business backend support company for 1–10 person local crews.
 
 The goal is to dogfood the same thing being sold:
 
@@ -14,7 +14,7 @@ This is not an MSP cosplay stack. It is a practical workflow for going from firs
 
 ## Core Business Model
 
-Mike Hawkes helps small local businesses build and maintain the backend they need to operate professionally without hiring IT staff.
+Plain Web Works helps small local businesses build and maintain the backend they need to operate professionally without hiring IT staff.
 
 Primary customer:
 
@@ -533,7 +533,7 @@ Template:
 
 - No shared passwords sent by text
 - Owner keeps ownership of accounts
-- Mike Hawkes gets delegated/admin access where possible
+- Plain Web Works gets delegated/admin access where possible
 - Payment systems stay outside the website
 - Access is removed when engagement ends
 
@@ -798,7 +798,7 @@ Label them clearly as demos or sample builds.
 
 ## First Website Pages
 
-For the Mike Hawkes site:
+For the Plain Web Works site:
 
 ```text
 /
@@ -911,4 +911,4 @@ Use this period to:
 
 ## One-Line Summary
 
-**Mike Hawkes helps small local crews own their customer pipeline and clean up the backend tech nobody has time to manage.**
+**Plain Web Works helps small local crews own their customer pipeline and clean up the backend tech nobody has time to manage.**
