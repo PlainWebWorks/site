@@ -63,7 +63,7 @@ _Last updated: 2026-06-03_
 - [ ] Add Google Business Profile link
 - [ ] Add Search Console
 - [ ] Add analytics (Cloudflare Web Analytics is simplest — already in the stack)
-- [ ] Privacy policy page
+- [x] Privacy policy and terms pages — done, linked in footer, noindex until launch
 - [ ] Terms page
 - [ ] Fix OG image to absolute URL (`https://plainwebworks.co/assets/plain-web-works-hero.png`)
 
@@ -128,7 +128,7 @@ _Last updated: 2026-06-03_
 5. Update `robots.txt` to allow crawling
 6. Add Search Console
 7. Add analytics (Cloudflare Web Analytics)
-8. Add privacy policy and terms pages
+8. ~~Add privacy policy and terms pages~~ — done
 9. Push final site
 10. Run health check — confirm all green
 11. Create Google Business Profile
