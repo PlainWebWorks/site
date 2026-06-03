@@ -236,6 +236,50 @@
       margin-bottom: 4px;
     }
 
+    /* Pricing */
+    .pricing-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 0.1in;
+    }
+
+    .pricing-list li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      column-gap: 8px;
+      row-gap: 1px;
+    }
+
+    .pkg-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #17211d;
+    }
+
+    .pkg-price {
+      font-size: 11px;
+      font-weight: 800;
+      color: #315f4b;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .pkg-desc {
+      grid-column: 1 / -1;
+      font-size: 10px;
+      color: #5b6861;
+      line-height: 1.4;
+    }
+
+    .pricing-note {
+      margin-top: 0.1in;
+      font-size: 9.5px;
+      color: #5b6861;
+      font-style: italic;
+    }
+
     /* ── Footer ── */
     .footer {
       background: #17211d;
@@ -342,19 +386,40 @@
           We set things up so you can hand them off or walk away at any time.
           No hostage websites.
         </div>
+
+        <div class="pricing">
+          <p class="section-label" style="margin-top:0.2in;">Packages</p>
+          <ul class="pricing-list">
+            <li>
+              <span class="pkg-name">Starter Presence</span>
+              <span class="pkg-price">$750 setup + $75/mo</span>
+              <span class="pkg-desc">One-page site, domain, email, Google listing, contact form</span>
+            </li>
+            <li>
+              <span class="pkg-name">Local Business Kit</span>
+              <span class="pkg-price">$1,500 setup + $150/mo</span>
+              <span class="pkg-desc">Up to 5 pages, reviews, analytics, monthly support</span>
+            </li>
+            <li>
+              <span class="pkg-name">Web Cleanup</span>
+              <span class="pkg-price">From $500</span>
+              <span class="pkg-desc">Audit and fix an existing mess — domain, email, listings</span>
+            </li>
+          </ul>
+          <p class="pricing-note">Hosting, domains, and third-party costs billed separately at cost.</p>
+        </div>
       </div>
 
     </div>
 
     <footer class="footer">
-      <!-- Update phone once Google Voice number is set up -->
       <div class="footer-item">
         <strong>Email</strong>
         hello@plainwebworks.co
       </div>
       <div class="footer-item">
         <strong>Phone</strong>
-        (555) 555-5555
+        (803) 594-2461
       </div>
       <div class="footer-item">
         <strong>Web</strong>
