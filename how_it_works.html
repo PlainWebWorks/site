@@ -170,6 +170,28 @@
               We do not use tools that require us to be involved just to keep the lights on.
             </p>
 
+            <h2>The dependency problem</h2>
+            <p>
+              In March 2016, a developer removed a small JavaScript package called
+              <a href="https://en.wikipedia.org/wiki/Npm_left-pad_incident" target="_blank" rel="noopener">left-pad</a>
+              from the npm registry. It was 11 lines of code that added spaces to the left of a string.
+              Within hours, React, Babel, and thousands of other projects stopped building.
+              The entire Node.js ecosystem broke because every project in the chain had assumed that package would always be there.
+              This is called a supply chain problem, and it does not require a malicious actor —
+              it can happen when a package author simply changes their mind.
+            </p>
+            <p>
+              None of our clients would have been affected. This site has no npm packages, no build step,
+              no third-party libraries of any kind. There is no dependency chain to collapse.
+            </p>
+            <p>
+              This is not a niche concern. Dependency chains across the internet have grown so deep and tangled
+              that most developers could not tell you everything their project actually depends on —
+              and neither could the developers of the packages they use.
+              It is a growing structural problem that the industry has largely decided to ignore.
+              We chose not to participate in it.
+            </p>
+
             <h2>The security picture</h2>
             <p>
               This section exists because the person behind Plain Web Works has a professional background in cybersecurity.
