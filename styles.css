@@ -331,6 +331,8 @@ a {
   padding: 16px 18px;
   font-weight: 760;
   box-shadow: 0 1px 0 rgba(23, 33, 29, 0.03);
+  display: flex;
+  align-items: center;
 }
 
 .feature-grid li::before,
