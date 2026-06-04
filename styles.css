@@ -540,6 +540,66 @@ details p {
   margin: 0;
 }
 
+.contact-section {
+  max-width: 620px;
+}
+
+.contact-section h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.contact-section .lead {
+  margin: 0 0 36px;
+}
+
+.form-group {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 760;
+  font-size: 0.95rem;
+}
+
+.form-hint {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  appearance: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.form-submit {
+  margin-top: 8px;
+}
+
 @media (max-width: 900px) {
   .nav-toggle {
     display: block;

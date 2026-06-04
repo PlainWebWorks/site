@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Free Website Check | Plain Web Works</title>
+    <meta name="description" content="Tell us about your business and we'll check your current web setup for free. No pressure, no fake emergency.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Plain Web Works home">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span>Plain Web Works</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="nav-menu" id="nav-menu">
+          <a href="/#packages">Packages</a>
+          <a href="/#process">Process</a>
+          <a href="/#faq">FAQ</a>
+          <a class="nav-cta" href="/contact.html">Free website check</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="wrap">
+          <div class="contact-section">
+            <p class="section-kicker">Free website check</p>
+            <h1>Tell us what you've got.</h1>
+            <p class="lead">
+              We'll look at your current setup and tell you what's broken,
+              what matters, and what can wait. No pressure, no fake emergency.
+              We typically respond within one business day.
+            </p>
+
+            <form method="POST" action="https://formspree.io/f/maqznqlk" novalidate>
+              <input type="hidden" name="_next" value="https://plainwebworks.co/thank_you.html">
+              <input type="hidden" name="_subject" value="Free website check request">
+
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-input" type="text" id="name" name="name" autocomplete="name" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="message">What's going on with your web presence?</label>
+                <textarea class="form-textarea" id="message" name="message" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">
+                  Phone <span class="form-hint">(optional)</span>
+                </label>
+                <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="website">
+                  Current website <span class="form-hint">(optional)</span>
+                </label>
+                <input class="form-input" type="url" id="website" name="website" placeholder="https://" autocomplete="url">
+              </div>
+
+              <div class="form-submit">
+                <button class="button button-primary" type="submit">Send message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <p>&copy; <span id="year">2026</span> Plain Web Works</p>
+        <p>
+          <a href="mailto:hello@plainwebworks.co">hello@plainwebworks.co</a>
+          <span aria-hidden="true"> | </span>
+          <a href="tel:+18035942461">(803) 594-2461</a>
+          <span aria-hidden="true"> | </span>
+          <a href="/privacy.html">Privacy</a>
+          <span aria-hidden="true"> | </span>
+          <a href="/terms.html">Terms</a>
+          <span aria-hidden="true"> | </span>
+          <a href="/how_it_works.html">How it works</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
