@@ -1,80 +1,64 @@
-Plain Web Works
-Project Overview
-Plain Web Works is a small business web setup and maintenance service targeting local sole operators and small crews — landscapers, handymen, contractors, churches, auto shops. The value proposition is: get them off Facebook-only and off lead-gen platforms (Angi, Thumbtack), give them a real web presence they actually own, and make it easy to hand off or fire us.
-No lock-in. No hostage websites. Client always owns their domain and accounts.
-Repository Structure
-/                        # Marketing site (plainwebworks.co)
-├── index.html           # Main landing page
-├── styles.css
-├── script.js
-├── assets/
-├── CLAUDE.md
-│
-├── src/
-│   └── plainwebworks_healthcheck/
-│       └── cli.py       # Client health check runner
-├── clients.yml          # Client list and check config
-└── reports/
-    └── daily/           # JSON health check output, one file per date
-Stack
-Marketing Site
+# Plain Web Works — Site Repo
 
-Pure static HTML/CSS/JS — no frameworks, no build step, no dependencies
-Deployed via GitHub to Cloudflare Pages
-Keep it that way. Do not introduce npm, bundlers, or JS frameworks unless explicitly asked
+## What this is
 
-Health Check CLI (src/plainwebworks_healthcheck/cli.py)
+Marketing site for [plainwebworks.co](https://plainwebworks.co) and associated print assets. Small business web setup and maintenance service targeting local sole operators — landscapers, handymen, contractors, churches, auto shops.
 
-Python 3.11+
-Dependencies: requests, pyyaml, beautifulsoup4
-Checks run synchronously per client, sequentially
-Output: JSON to reports/daily/YYYY-MM-DD.json
-Client config lives in clients.yml
+Core value prop: get clients off Facebook-only and off lead-gen platforms, give them a real web presence they own, and make it easy to hand off or fire us. No lock-in. No hostage websites.
 
-Conventions
-HTML/CSS/JS
+## Repository structure
 
-Semantic HTML, accessible markup (aria labels, skip links, sr-only where needed)
-Mobile-first
-No inline styles
-Class names are kebab-case
-Keep the site fast and simple — it's a brochure, not an app
+```
+index.html              # Main landing page
+how_it_works.html       # Technical explainer (stack, deployment, open source)
+privacy.html            # Privacy policy
+terms.html              # Terms of service
+sample_report.html      # Example health check report (linked from how_it_works)
+flyer.html              # Print capability statement (letter size)
+business_card.html      # Print business card (3.5×2in, centers on letter paper)
+styles.css
+script.js
+favicon.svg
+assets/
+wrangler.jsonc          # Cloudflare Workers/Pages config (auto-generated, do not edit)
+```
 
-Python
+## Stack
 
-Type hints throughout
-Dataclasses for structured results (CheckResult)
-No global mutable state
-Errors surface as CheckResult(ok=False, note=...) — do not raise exceptions for expected failure conditions
-Keep check functions pure where possible: take inputs, return a CheckResult
+Pure static HTML/CSS/JS — no frameworks, no build step, no dependencies. Deployed via GitHub push to Cloudflare Pages. Changes are live within ~2 minutes.
 
-clients.yml Schema
-yamlclients:
-  - name: "Business Name"
-    domain: example.com
-    canonical_url: https://www.example.com
-    launched: true
-    expected_email:
-      - contact@example.com
-    expected_phone:
-      - "803-594-2461"
-    required_text:
-      - "Some text that must appear on the page"
-    required_links:
-      - /contact
-    check_paths:
-      - /
-      - /contact
-Business Context (Relevant to Code Decisions)
+**Keep it that way.** Do not introduce npm, bundlers, or JS frameworks unless explicitly asked.
 
-Clients are non-technical small business owners — any client-facing output (reports, dashboards, emails) must be in plain English, no jargon
-The health check CLI justifies the monthly retainer — its output should be meaningful to a non-technical reader
-Severity matters: DNS down is not the same as a cert expiring in 25 days. Flag this distinction in output
-Everything the client touches should be owned by them — no proprietary lock-in in tooling choices
+## Related repos
 
-What to Avoid
+- **[PlainWebWorks/healthcheck](https://github.com/PlainWebWorks/healthcheck)** — Python CLI that runs daily health checks on client sites (DNS, SSL, HTTP, SEO, contact info). Lives in a separate repo. `clients.yml` is gitignored there and not tracked anywhere publicly.
 
-Do not add dependencies to the marketing site without asking
-Do not refactor working check functions without a clear reason
-Do not change the phone number (803) 594-2461 or email hello@plainwebworks.co in the marketing site
-Do not make the site clever — it should be plain, fast, and clear
+## Conventions
+
+### HTML/CSS/JS
+
+- Semantic HTML, accessible markup (aria labels, skip links, `sr-only` where needed)
+- Mobile-first
+- No inline styles
+- Class names are kebab-case
+- **File names use underscores**, not hyphens (`business_card.html`, not `business-card.html`)
+- Keep the site fast and simple — it's a brochure, not an app
+
+### Do not change
+
+- Phone number: **(803) 594-2461**
+- Email: **hello@plainwebworks.co**
+- `wrangler.jsonc` — managed by Cloudflare, leave it alone
+
+## Business context
+
+- Clients are non-technical small business owners — any client-facing output must be in plain English, no jargon
+- The health check CLI justifies the monthly retainer — its output should be meaningful to a non-technical reader
+- Everything the client touches should be owned by them — no proprietary lock-in in tooling choices
+- Severity matters in health checks: DNS down is not the same as a cert expiring in 25 days
+
+## What to avoid
+
+- Do not add dependencies to the marketing site without asking
+- Do not make the site clever — it should be plain, fast, and clear
+- Do not introduce abstractions or refactor things that are working
