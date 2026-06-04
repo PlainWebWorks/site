@@ -600,6 +600,33 @@ details p {
   margin-top: 8px;
 }
 
+.content-section {
+  max-width: 720px;
+}
+
+.content-section h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 28px;
+}
+
+.content-section .lead {
+  line-height: 1.7;
+  margin-bottom: 44px;
+}
+
+.legal-meta {
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+
+.diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0 8px;
+}
+
 @media (max-width: 900px) {
   .nav-toggle {
     display: block;
