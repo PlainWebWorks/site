@@ -170,6 +170,19 @@
               We do not use tools that require us to be involved just to keep the lights on.
             </p>
 
+            <h2>The security picture</h2>
+            <p>
+              Because the site is plain files served from Cloudflare's edge, there is no server to break into.
+              No database means there is nothing to dump — no customer records, no stored passwords, no form submissions sitting somewhere waiting to be found.
+              No CMS means no admin login page, no plugin with a known vulnerability, no outdated software quietly accruing exploits in the background.
+            </p>
+            <p>
+              Contact form submissions go through Formspree — they land in email and are not stored anywhere on our end.
+              The realistic attack surface for this entire setup is two things: a compromised GitHub account or a compromised Cloudflare account.
+              Strong passwords and two-factor authentication on both is essentially the full security story.
+              There is no third thing.
+            </p>
+
             <h2>The bottom line</h2>
             <p>
               We use boring, proven, open tools that have been around for decades and will be around for decades more.
