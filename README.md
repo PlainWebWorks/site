@@ -31,16 +31,6 @@ The marketing site for Plain Web Works, a small business web setup and maintenan
 | `flyer.html` | One-page capability statement (letter size, print-ready) |
 | `business_card.html` | Business card (3.5×2in, print-ready, centers on letter paper) |
 
-## Development
-
-No build step. Open any `.html` file directly in a browser or use any static file server:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then visit `http://localhost:8000`.
-
 ## Deployment
 
 Pushing to `main` triggers an automatic deploy via Cloudflare Pages. Changes are live within a couple of minutes.
