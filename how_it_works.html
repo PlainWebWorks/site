@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How It Works | Plain Web Works</title>
+    <meta name="description" content="The tools and approach behind Plain Web Works — plain, open, and owned by you.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Plain Web Works home">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span>Plain Web Works</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="nav-menu" id="nav-menu">
+          <a href="/#packages">Packages</a>
+          <a href="/#process">Process</a>
+          <a href="/#faq">FAQ</a>
+          <a class="nav-cta" href="mailto:hello@plainwebworks.co?subject=Free%20website%20check">Free website check</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="wrap" style="max-width: 720px;">
+          <p class="section-kicker">Under the hood</p>
+          <h1 style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0 0 24px;">How it works</h1>
+          <p style="color: var(--muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 48px;">
+            If you are the kind of person who wants to know what you are actually paying for before writing a check,
+            this page is for you. No jargon. Just a plain explanation of how we build things and why we made those choices.
+          </p>
+
+          <div class="legal-body">
+
+            <h2>The short version</h2>
+            <p>
+              We build websites out of plain HTML, CSS, and JavaScript — the same formats the web has used since the beginning.
+              No proprietary software, no platform you can get locked into, no monthly fee owed to a website builder just to keep your site alive.
+              Your files are yours. If you ever leave, you take everything with you.
+            </p>
+
+            <h2>What your site is actually made of</h2>
+            <p>
+              A website is, at its core, a collection of text files. HTML describes the content and structure.
+              CSS controls how it looks. JavaScript handles anything interactive, like a contact form or a mobile menu.
+              That is all a basic business website needs to be.
+            </p>
+            <p>
+              We do not use page builders, drag-and-drop editors, or proprietary CMS platforms.
+              Those tools trade simplicity for lock-in: they are easy to start on but hard to leave,
+              and they add cost and complexity that most small business sites do not need.
+              A plain HTML site loads faster, costs less to host, and has no moving parts to break or expire.
+            </p>
+
+            <h2>Where it lives</h2>
+            <p>
+              Your site is hosted on <a href="https://pages.cloudflare.com" target="_blank" rel="noopener">Cloudflare Pages</a>,
+              which serves files from data centers around the world so your site loads quickly regardless of
+              where your visitor is coming from. Cloudflare is one of the largest internet infrastructure companies in the world.
+              Your site is not sitting on a shared server in someone's basement.
+            </p>
+            <p>
+              The code itself lives in a <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> repository.
+              GitHub is where developers store and track code — it is owned by Microsoft and is the industry standard.
+              When we push an update to GitHub, Cloudflare automatically picks it up and deploys it within minutes.
+              No FTP, no manual uploads, no login to a hosting control panel.
+            </p>
+
+            <h2>The deployment pipeline</h2>
+            <p>Here is how a change goes from a text editor to a visitor's browser:</p>
+
+            <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin:20px 0 8px;" role="img" aria-label="Deployment flow: push code to GitHub, Cloudflare auto-deploys to its edge network, visitor is served the page">
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#315f4b"/>
+                </marker>
+              </defs>
+              <rect x="0" y="0" width="760" height="180" rx="10" fill="#f0f7f3" stroke="#d8ddd5" stroke-width="1"/>
+              <!-- Box 1: You -->
+              <rect x="15" y="50" width="100" height="76" rx="8" fill="#fff" stroke="#315f4b" stroke-width="1.5"/>
+              <text x="65" y="84" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="700" fill="#17211d">You</text>
+              <text x="65" y="103" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#5b6861">local files</text>
+              <!-- Arrow 1 -->
+              <line x1="115" y1="88" x2="180" y2="88" stroke="#315f4b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <text x="148" y="80" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#315f4b">git push</text>
+              <!-- Box 2: GitHub -->
+              <rect x="184" y="50" width="132" height="76" rx="8" fill="#fff" stroke="#315f4b" stroke-width="1.5"/>
+              <text x="250" y="84" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="700" fill="#17211d">GitHub</text>
+              <text x="250" y="103" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#5b6861">PlainWebWorks/site</text>
+              <!-- Arrow 2 -->
+              <line x1="316" y1="88" x2="388" y2="88" stroke="#315f4b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <text x="352" y="79" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#315f4b">auto-deploy</text>
+              <text x="352" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#5b6861">~2 min</text>
+              <!-- Box 3: Cloudflare -->
+              <rect x="392" y="50" width="152" height="76" rx="8" fill="#fff" stroke="#315f4b" stroke-width="1.5"/>
+              <text x="468" y="80" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="700" fill="#17211d">Cloudflare</text>
+              <text x="468" y="97" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" font-weight="600" fill="#315f4b">Pages + Edge</text>
+              <text x="468" y="114" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#5b6861">200+ locations</text>
+              <!-- Arrow 3 -->
+              <line x1="544" y1="88" x2="612" y2="88" stroke="#315f4b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+              <text x="578" y="79" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#315f4b">HTML/CSS/JS</text>
+              <text x="578" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="9" fill="#5b6861">on request</text>
+              <!-- Box 4: Visitor -->
+              <rect x="616" y="50" width="128" height="76" rx="8" fill="#fff" stroke="#315f4b" stroke-width="1.5"/>
+              <text x="680" y="84" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="700" fill="#17211d">Visitor</text>
+              <text x="680" y="103" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10" fill="#5b6861">plainwebworks.co</text>
+            </svg>
+
+            <h2>Your domain</h2>
+            <p>
+              Your domain name — the address people type to find you — is registered through
+              <a href="https://www.cloudflare.com/products/registrar/" target="_blank" rel="noopener">Cloudflare Registrar</a>,
+              which charges exactly what the domain costs with no markup and no upsells.
+            </p>
+            <p>
+              In most cases we set the domain up directly in your name so you have full access from day one.
+              In some cases we purchase the domain on your behalf and bill you for it — for example,
+              if you are not comfortable navigating the registration process yourself.
+              Either way, the domain is yours. If you are current on your account and want it transferred
+              to your own registrar account, we will do that. The one caveat: Cloudflare requires a 60-day
+              waiting period before a newly registered domain can be transferred out. That is their policy,
+              not ours, and it applies to all registrars. After those 60 days, the transfer is yours to request at any time.
+            </p>
+
+            <h2>Email</h2>
+            <p>
+              Business email (you@yourbusiness.com) is set up through
+              <a href="https://workspace.google.com" target="_blank" rel="noopener">Google Workspace</a>
+              the same tool your personal email may already be using, just with your domain on it instead of @gmail.com.
+              We also set up the security records (SPF, DKIM, DMARC) that tell other mail servers your email is legitimate,
+              which reduces the chance your messages end up in spam.
+            </p>
+
+            <h2>Everything is open</h2>
+            <p>
+              This website — the one you are reading right now — is built the same way we build client sites.
+              The source code is publicly available on GitHub. Our business card is an HTML file.
+              Our client flyer is an HTML file. <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">We eat our own cooking.</a>
+            </p>
+            <p>
+              You can <a href="https://github.com/PlainWebWorks/site" target="_blank" rel="noopener">view the source code for this site on GitHub</a>.
+              Nothing is hidden. If you want to hand it to another developer someday, they will have no trouble reading it.
+            </p>
+            <p>
+              The Python script we use to run monthly health checks on client sites —
+              checking DNS, SSL certificates, page content, contact information, and broken links —
+              is also <a href="https://github.com/PlainWebWorks/healthcheck" target="_blank" rel="noopener">publicly available on GitHub</a>.
+              That is the code that justifies the maintenance retainer.
+            </p>
+
+            <h2>What we do not use</h2>
+            <p>
+              We do not use WordPress (common target for hacks, requires constant updates and plugin management).
+              We do not use Wix, Squarespace, or Webflow (monthly fees to keep your site alive, hard to export).
+              We do not use heavy JavaScript frameworks (unnecessary for a business site, slower to load, harder to maintain).
+              We do not use tools that require us to be involved just to keep the lights on.
+            </p>
+
+            <h2>The bottom line</h2>
+            <p>
+              We use boring, proven, open tools that have been around for decades and will be around for decades more.
+              The goal is a site that works, loads fast, costs what it should, and belongs to you.
+              Not a platform. Not a subscription. Not a hostage situation.
+            </p>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <p>&copy; <span id="year">2026</span> Plain Web Works</p>
+        <p>
+          <a href="mailto:hello@plainwebworks.co">hello@plainwebworks.co</a>
+          <span aria-hidden="true"> | </span>
+          <a href="tel:+18035942461">(803) 594-2461</a>
+          <span aria-hidden="true"> | </span>
+          <a href="/privacy.html">Privacy</a>
+          <span aria-hidden="true"> | </span>
+          <a href="/terms.html">Terms</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
