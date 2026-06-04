@@ -172,9 +172,26 @@
 
             <h2>The security picture</h2>
             <p>
-              Because the site is plain files served from Cloudflare's edge, there is no server to break into.
-              No database means there is nothing to dump — no customer records, no stored passwords, no form submissions sitting somewhere waiting to be found.
-              No CMS means no admin login page, no plugin with a known vulnerability, no outdated software quietly accruing exploits in the background.
+              This section exists because the person behind Plain Web Works has a professional background in cybersecurity.
+              The way this setup is built is not an accident — it reflects how someone who thinks about attack surfaces for a living actually builds things.
+            </p>
+            <p>
+              WordPress powers roughly 40% of the web, which makes it the single biggest target on the internet.
+              Every WordPress site has three layers of attack surface: the WordPress core itself, whatever theme is installed, and every plugin.
+              All three require constant updates. Miss one and you are exposed. Automated bots scan the internet around the clock looking for
+              outdated WordPress installs — they do not need to target you specifically, they just find you.
+              Every WordPress site also ships with an admin login page at <code>/wp-admin</code> that those same bots hammer constantly looking for weak passwords.
+            </p>
+            <p>
+              Wix and Squarespace are a different problem. They are managed platforms, so you are not maintaining software —
+              but your site only exists inside their system. There is no meaningful export. If they raise prices, get acquired, or shut down,
+              your options are limited. That is a business risk, not just a technical one.
+            </p>
+            <p>
+              A plain HTML site has none of these problems. There is no server to break into, no database to dump, no admin panel to brute-force,
+              no plugin ecosystem to go stale, no PHP interpreter to exploit.
+              The files sit on Cloudflare's edge network — one of the largest and most hardened infrastructure platforms on the planet —
+              and get served directly to the browser. There is nothing in between for an attacker to touch.
             </p>
             <p>
               Contact form submissions go through Formspree — they land in email and are not stored anywhere on our end.
