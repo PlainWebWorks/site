@@ -39,7 +39,7 @@ Plain English:
 
 ## 2. Daily Health Check Script
 
-The core maintenance tool should be a Python script that runs daily.
+The core maintenance tool should is a Python script that runs daily.
 
 It should check every client site and write results to a file.
 
@@ -301,22 +301,6 @@ Plain English:
 ## 4. Later Checks
 
 After the public-surface checker works, add optional advanced checks.
-
-### Cloudflare Pages Deployment Status
-
-Using Cloudflare API later, check:
-
-- Last deployment succeeded.
-- Production branch is correct.
-- Pages project exists.
-- Deployment timestamp is recent enough.
-- No failed deployment is sitting there unnoticed.
-
-This requires API tokens and should be done carefully.
-
-Use scoped/read-only API tokens where possible.
-
-Do not use global god-mode API keys unless there is no sane alternative.
 
 ---
 
