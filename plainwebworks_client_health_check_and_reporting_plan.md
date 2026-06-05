@@ -304,28 +304,6 @@ After the public-surface checker works, add optional advanced checks.
 
 ---
 
-### Cloudflare DNS Snapshot
-
-Later, for domains you manage:
-
-- Pull DNS records.
-- Save a daily or weekly snapshot.
-- Detect unexpected changes.
-- Confirm important records exist.
-
-Useful records:
-
-- `A`
-- `AAAA`
-- `CNAME`
-- `MX`
-- `TXT`
-- SPF
-- DKIM
-- DMARC
-- Google verification records
-
----
 
 ### Email Authentication
 
