@@ -4,6 +4,8 @@ if (contactForm) {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const button = contactForm.querySelector("button[type='submit']");
+    if (!button) return;
+    
     button.disabled = true;
     button.textContent = "Sending…";
     try {
