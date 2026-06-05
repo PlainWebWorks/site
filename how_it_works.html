@@ -194,8 +194,9 @@
 
             <h2>The security picture</h2>
             <p>
-              This section exists because the person behind Plain Web Works has a professional background in cybersecurity.
-              The way this setup is built is not an accident — it reflects how someone who thinks about attack surfaces for a living actually builds things.
+              This section exists because the person behind Plain Web Works spent years as a malware reverse engineer —
+              someone who pulls apart malicious software to understand exactly how attacks work.
+              The way this setup is built is not an accident — it reflects how someone who has seen the worst from the inside actually builds things.
             </p>
             <p>
               WordPress powers roughly 40% of the web, which makes it the single biggest target on the internet.
@@ -220,6 +221,10 @@
               The realistic attack surface for this entire setup is two things: a compromised GitHub account or a compromised Cloudflare account.
               Strong passwords and two-factor authentication on both is essentially the full security story.
               There is no third thing.
+            </p>
+            <p>
+              And if either account were somehow compromised, recovery is trivial — the site is just files.
+              Redeploy from a local copy in minutes. There is no database to restore, no data to recover, no vendor to call.
             </p>
 
             <h2>The bottom line</h2>

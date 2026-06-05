@@ -277,6 +277,34 @@ a {
   color: var(--ink);
 }
 
+.how-it-works-band {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(28px, 5vw, 48px) 0;
+}
+
+.how-it-works-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.how-it-works-band-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #fff;
+}
+
+.how-it-works-band-sub {
+  margin: 0;
+  color: #a8b8b0;
+  font-size: 0.95rem;
+  max-width: 52ch;
+}
+
 .section {
   padding: clamp(64px, 9vw, 108px) 0;
 }
