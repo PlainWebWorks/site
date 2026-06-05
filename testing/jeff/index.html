@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeff Wright's Handyman Service</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:   #c0272d;
+      --blue:  #1b3a6b;
+      --light: #f4f6fa;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #222;
+      background: var(--light);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--blue);
+      color: var(--white);
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    header img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid var(--red);
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    header p.tagline {
+      font-size: 1.05rem;
+      margin-top: 0.4rem;
+      color: #c8d8f8;
+    }
+
+    .cta-bar {
+      background: var(--red);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .cta-bar a {
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .cta-bar a:hover { text-decoration: underline; }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    section h2 {
+      font-size: 1.7rem;
+      color: var(--blue);
+      border-left: 5px solid var(--red);
+      padding-left: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-top: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      text-align: center;
+    }
+
+    .service-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .service-card h3 { font-size: 1rem; color: var(--blue); }
+
+    /* about */
+    #about p {
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: #333;
+    }
+
+    /* divider */
+    .divider {
+      border: none;
+      border-top: 2px solid #dce3ef;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* contact */
+    #contact {
+      background: var(--blue);
+      color: var(--white);
+      text-align: center;
+      max-width: 100%;
+      padding: 3rem 1.5rem;
+    }
+
+    #contact h2 {
+      color: var(--white);
+      border-color: var(--white);
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    #contact .phone-link {
+      display: inline-block;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      background: var(--red);
+      padding: 0.6rem 2rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    #contact .phone-link:hover { opacity: 0.9; }
+
+    #contact p {
+      color: #c8d8f8;
+      font-size: 0.95rem;
+      margin-top: 0.75rem;
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.85rem;
+      color: #888;
+      background: #eaecf2;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.6rem; }
+      .cta-bar a { font-size: 1.2rem; }
+      #contact .phone-link { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="../jeff_wright.jpg" alt="Jeff Wright's Handyman Service logo" />
+    <h1>Jeff Wright's Handyman Service</h1>
+    <p class="tagline">Honest work. Fair prices. Done right the first time.</p>
+  </header>
+
+  <!-- CALL BAR -->
+  <div class="cta-bar">
+    <a href="tel:7064012214">&#128222; Call Now &mdash; 706-401-2214</a>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2>Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🔨</div>
+        <h3>General Repairs</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🚪</div>
+        <h3>Doors &amp; Windows</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🪟</div>
+        <h3>Drywall &amp; Patching</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🖌️</div>
+        <h3>Painting &amp; Touch-Ups</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🛁</div>
+        <h3>Bathroom Repairs</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">💡</div>
+        <h3>Minor Electrical</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🔧</div>
+        <h3>Plumbing Fixes</h3>
+      </div>
+      <div class="service-card">
+        <div class="icon">🏡</div>
+        <h3>Odd Jobs &amp; More</h3>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Jeff</h2>
+    <p>
+      Jeff Wright has been serving homeowners across the area for years with
+      dependable, quality handyman work. Whether it's a leaky faucet, a sticky
+      door, or a long to-do list that just never gets done, Jeff shows up on
+      time, gets the job done right, and charges a fair price. No job is too
+      small.
+    </p>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <a class="phone-link" href="tel:7064012214">706-401-2214</a>
+    <p>Call or text anytime &mdash; Jeff will get back to you quickly.</p>
+    <p>Serving the local area &bull; Free estimates</p>
+  </section>
+
+  <footer>
+    &copy; 2026 Jeff Wright's Handyman Service &bull; All rights reserved
+  </footer>
+
+</body>
+</html>
