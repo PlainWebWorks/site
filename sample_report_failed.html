@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site Health Report — June 03, 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  background: #fbfaf6;
+  color: #17211d;
+}
+a { color: inherit; }
+header {
+  background: #17211d;
+  color: #fff;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.brand { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
+.report-meta { color: rgba(255,255,255,0.6); font-size: 0.88rem; }
+main { max-width: 820px; margin: 0 auto; padding: 32px 24px 64px; }
+.client {
+  background: #fff;
+  border: 1px solid #d8ddd5;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 3px rgba(23,33,29,0.06);
+}
+.client-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.client-header h2 { margin: 0 0 3px; font-size: 1.25rem; }
+.domain { color: #5b6861; font-size: 0.88rem; text-decoration: none; }
+.domain:hover { text-decoration: underline; }
+.badge {
+  display: inline-block;
+  padding: 5px 13px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-healthy { background: #315f4b; }
+.badge-warning { background: #b87c1a; }
+.badge-error { background: #a02020; }
+.issues {
+  background: #fff8f0;
+  border: 1px solid #e8c98a;
+  border-radius: 6px;
+  padding: 13px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+.issues-error {
+  background: #fff4f4;
+  border-color: #e8aaaa;
+}
+.issues strong { display: block; margin-bottom: 4px; }
+.issues ul { margin: 0; padding-left: 18px; }
+.issues li { margin-top: 2px; }
+.group { margin-top: 22px; }
+.group-label {
+  margin: 0 0 8px;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5b6861;
+}
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.check {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.check-pass { background: #f3faf5; }
+.check-fail { background: #fdf4f4; }
+.check-icon { font-weight: 900; width: 14px; flex-shrink: 0; font-style: normal; }
+.check-pass .check-icon { color: #315f4b; }
+.check-fail .check-icon { color: #a02020; }
+.check-label { font-weight: 700; flex-shrink: 0; }
+.check-detail { color: #5b6861; margin-left: 2px; word-break: break-word; }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #5b6861;
+  font-size: 0.85rem;
+  border-top: 1px solid #d8ddd5;
+}
+@media (max-width: 600px) {
+  header { padding: 14px 18px; }
+  main { padding: 20px 16px 48px; }
+  .client { padding: 20px; }
+  .client-header { flex-direction: column; }
+}
+.sample-banner {
+  background: #b87c1a;
+  color: #fff;
+  text-align: center;
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+</style>
+</head>
+<body>
+<div class="sample-banner">Sample report — this shows what a report with issues looks like.</div>
+<header><span class="brand">Plain Web Works</span><span class="report-meta">Site Health Report &middot; June 03, 2026</span></header>
+<main><section class="client"><div class="client-header"><div><h2>Plain Web Works</h2><a class="domain" href="https://plainwebworks.co" target="_blank" rel="noopener">plainwebworks.co</a></div><span class="badge badge-warning">Issues found</span></div><div class="issues"><strong>Issues found:</strong><ul><li>Visible to search engines</li><li>Links followed by search engines</li><li>Crawling allowed</li></ul></div><div class="group"><p class="group-label">Availability</p><ul class="checks"><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Domain resolves</span><span class="check-detail">Resolves to: 104.21.19.91, 172.67.185.181, 2606:4700:3037::6815:135b, 2606:4700:3037::ac43:b9b5</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">SSL certificate</span><span class="check-detail">Expires 2026-09-01 · 89 days remaining</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">HTTP redirects to HTTPS</span><span class="check-detail">http://plainwebworks.co → https://plainwebworks.co/</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Site responds</span><span class="check-detail">HTTP 200</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Response time</span><span class="check-detail">27.69 ms</span></li></ul></div><div class="group"><p class="group-label">Search visibility</p><ul class="checks"><li class="check check-fail"><span class="check-icon">✗</span><span class="check-label">Visible to search engines</span><span class="check-detail">Hidden from search engines</span></li><li class="check check-fail"><span class="check-icon">✗</span><span class="check-label">Links followed by search engines</span><span class="check-detail">Links marked nofollow</span></li><li class="check check-fail"><span class="check-icon">✗</span><span class="check-label">Crawling allowed</span><span class="check-detail">robots.txt is blocking all crawlers</span></li></ul></div><div class="group"><p class="group-label">Page content</p><ul class="checks"><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Page title</span><span class="check-detail">Plain Web Works | Small Business Website Setup</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Meta description</span><span class="check-detail">Plain Web Works helps small businesses set up domains, websites, business email, Google Business Profile, contact forms, local SEO, analytics, and basic security.</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Social share title</span><span class="check-detail">Plain Web Works</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Social share description</span><span class="check-detail">We put small businesses online without making it weird.</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Structured data</span><span class="check-detail">Present</span></li></ul></div><div class="group"><p class="group-label">Contact and content</p><ul class="checks"><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Contact information</span><span class="check-detail">Email found · Phone found</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Required page text</span><span class="check-detail">3 item(s) present</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Required links</span><span class="check-detail">2 link(s) present</span></li></ul></div><div class="group"><p class="group-label">Pages and links</p><ul class="checks"><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">All pages respond</span><span class="check-detail">2 path(s) responding</span></li><li class="check check-pass"><span class="check-icon">✓</span><span class="check-label">Internal links</span><span class="check-detail">0 link(s) checked</span></li></ul></div></section></main>
+<footer>Prepared by <a href="https://plainwebworks.co">Plain Web Works</a> &middot; June 03, 2026</footer>
+</body>
+</html>
