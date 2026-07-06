@@ -1,0 +1,459 @@
+<article>
+  <h1>Security Is Not a State</h1>
+
+  <p>One of the first security exercises I remember doing was almost insultingly simple.</p>
+
+  <p>I had a FreeBSD system. I connected to it with Telnet while capturing the traffic in Wireshark. Then I did the same thing with SSH.</p>
+
+  <p>The lesson was obvious.</p>
+
+  <p>With Telnet, I could inspect the traffic and see what I was doing. Credentials, commands, session data: there it was.</p>
+
+  <p>With SSH, I could still see that communication was happening. I could see the endpoints. I could see timing, packet sizes, and the existence of a session. But I could not simply read the application data out of the capture.</p>
+
+  <p>At the time, the lesson was:</p>
+
+  <blockquote>
+    <p>Telnet is insecure. SSH is secure.</p>
+  </blockquote>
+
+  <p>That is not wrong exactly.</p>
+
+  <p>It is just a dangerously incomplete way to think.</p>
+
+  <p>Years later, I think the more useful lesson was this:</p>
+
+  <blockquote>
+    <p><strong>SSH changed what an observer could know.</strong></p>
+  </blockquote>
+
+  <p>That is a much narrower statement.</p>
+
+  <p>It is also much more useful.</p>
+
+  <h2>The Problem With Declaring Something Secure</h2>
+
+  <p>A lot of security thinking starts by defining a state.</p>
+
+  <p>We turn off Telnet and enable SSH.</p>
+  <p>Now we are secure.</p>
+
+  <p>We add TLS.</p>
+  <p>Now we are secure.</p>
+
+  <p>We require MFA.</p>
+  <p>Now we are secure.</p>
+
+  <p>We move something behind a VPN.</p>
+  <p>Now we are secure.</p>
+
+  <p>The problem is not that these controls are useless. They are usually real improvements.</p>
+
+  <p>The problem is the leap from:</p>
+
+  <blockquote>
+    <p>This control prevents a known class of failure.</p>
+  </blockquote>
+
+  <p>to:</p>
+
+  <blockquote>
+    <p>This system is now secure.</p>
+  </blockquote>
+
+  <p>Those are not the same claim.</p>
+
+  <p>Using SSH instead of Telnet is entirely defensible. It removes the absurd property where a passive observer can simply read the session contents off the wire.</p>
+
+  <p>But the following statements are not equivalent:</p>
+
+  <blockquote><p>The traffic is encrypted.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The endpoint is trustworthy.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The implementation has no vulnerabilities.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The credentials are strong.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The server is configured correctly.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The user actually verified the server identity.</p></blockquote>
+  <p>That does not mean:</p>
+  <blockquote><p>The whole system is secure.</p></blockquote>
+
+  <p>Each statement is stronger than the one before it.</p>
+
+  <p>The failure happens when a system, an organization, or sometimes an entire industry silently promotes a weaker statement into a stronger one.</p>
+
+  <p>The packets are encrypted, therefore the connection is secure.</p>
+  <p>The object decoded, therefore the object is valid.</p>
+  <p>The object is valid, therefore the message is valid.</p>
+  <p>The message is valid, therefore it is valid at this point in the protocol.</p>
+  <p>The state is valid, therefore it must have been reached through a valid history.</p>
+
+  <p>That last jump is where things get especially interesting.</p>
+
+  <h2>A Valid State Does Not Prove a Valid History</h2>
+
+  <p>Consider a protocol as a state-transition system.</p>
+
+  <p>You have some state S<sub>n</sub>, and a set of rules describing which transitions are allowed.</p>
+
+  <p>Given the current state, there are two very different questions:</p>
+
+  <blockquote><p>What states can legally come next?</p></blockquote>
+
+  <p>and:</p>
+
+  <blockquote><p>What previous states could have produced this one?</p></blockquote>
+
+  <p>Those questions are not symmetrical.</p>
+
+  <p>A current state may tightly constrain the future while revealing almost nothing about the past.</p>
+
+  <p>Or many different histories may converge on exactly the same current state, even though those histories should produce different decisions about what happens next.</p>
+
+  <p>That means a system can arrive at a state that is perfectly valid in isolation but insufficient for making the next correct decision.</p>
+
+  <p>Here is a nontechnical example.</p>
+
+  <p>Imagine a group of parents who carpool their children.</p>
+
+  <p>Sometimes accidents happen during the ride, so the group has some rule for buying extra diapers. Everyone wants to contribute roughly their fair share. Nobody is trying to cheat anyone. In fact, some people may deliberately contribute a little extra.</p>
+
+  <p>The group keeps track of only one thing:</p>
+
+  <blockquote><p>There is currently $40 in the diaper fund.</p></blockquote>
+
+  <p>That sounds like state.</p>
+
+  <p>But how did the fund reach $40?</p>
+
+  <p>Maybe Alice paid $20 and Bob paid $20 while Carol paid nothing.</p>
+  <p>Maybe Carol paid the entire $40.</p>
+  <p>Maybe everyone contributed different amounts over several trips.</p>
+  <p>Maybe one parent already covered several emergency purchases directly and then also contributed to the fund.</p>
+
+  <p>All of those histories can converge on:</p>
+
+  <blockquote><p>Current balance: $40.</p></blockquote>
+
+  <p>But the correct future contribution is different depending on the history.</p>
+
+  <p>If the protocol has discarded that history and preserved only the current balance, then the current state is not sufficient for making the next fair decision.</p>
+
+  <p>Everyone can be honest.</p>
+  <p>Everyone can follow the rules.</p>
+  <p>Everyone can try to contribute fairly.</p>
+  <p>And the system can still fail.</p>
+
+  <p>Not because a participant was malicious.</p>
+
+  <p>Because the protocol destroyed information it later needed.</p>
+
+  <p>A useful way to state the problem is:</p>
+
+  <blockquote>
+    <p><strong>A state is sufficient only when the histories that can produce that state do not require meaningfully different future decisions.</strong></p>
+  </blockquote>
+
+  <p>Once distinguishable histories collapse into an indistinguishable present, the system may no longer know enough to behave correctly.</p>
+
+  <h2>What Exactly Do You Know?</h2>
+
+  <p>This is the question I keep coming back to.</p>
+
+  <p>Not:</p>
+  <blockquote><p>Is this secure?</p></blockquote>
+
+  <p>But:</p>
+  <blockquote><p>What do I actually know?</p></blockquote>
+
+  <p>And then:</p>
+  <blockquote><p>What am I inferring?</p></blockquote>
+
+  <p>And finally:</p>
+  <blockquote><p>What does the protocol actually prove?</p></blockquote>
+
+  <p>That way of thinking naturally creates a stack.</p>
+
+  <pre><code>bytes
+↓
+decoded object
+↓
+structurally valid object
+↓
+semantically valid object
+↓
+valid message
+↓
+valid message at this point in the protocol
+↓
+valid state transition
+↓
+valid reachable state
+↓
+sufficient history for the next decision</code></pre>
+
+  <p>Success at one layer does not automatically prove the next.</p>
+
+  <p>The bytes decoded.</p>
+  <p>Wonderful.</p>
+  <p>That tells you the bytes decoded.</p>
+
+  <p>The object matches the expected schema.</p>
+  <p>Wonderful.</p>
+  <p>That tells you the object matches the expected schema.</p>
+
+  <p>The message contains a legal value for every field.</p>
+  <p>Wonderful.</p>
+  <p>That does not prove the sender was allowed to send that message now.</p>
+
+  <p>That is probably why this line of thought makes me think about things like ASN.1.</p>
+
+  <p>A representation can decode correctly.</p>
+
+  <p>A decoded object can satisfy its structural constraints.</p>
+
+  <p>That still does not tell you whether the message is semantically appropriate, whether the sender was authorized to produce it, or whether it could have been reached through the legitimate protocol history you think preceded it.</p>
+
+  <p>Those are separate questions.</p>
+
+  <p>Security failures often happen because someone asks the first question and believes they answered the last one.</p>
+
+  <h2>The Web 2.0 Mistake</h2>
+
+  <p>This also gets at one of the mistakes I associate with a lot of Web 2.0-era application design.</p>
+
+  <p>A server hands something to a client.</p>
+
+  <p>Later, the client hands something back.</p>
+
+  <p>The application behaves as though the returned state has continuity with the state it originally sent.</p>
+
+  <p>But what exactly does the server know?</p>
+
+  <p>It knows that it sent an object.</p>
+
+  <p>It knows that later it received an object.</p>
+
+  <p>Those facts do not, by themselves, establish that the second object is the first object returning home unchanged.</p>
+
+  <p>That sounds obvious when stated plainly, but applications have repeatedly made some version of this mistake.</p>
+
+  <p>Hidden fields.</p>
+  <p>Client-maintained values.</p>
+  <p>Serialized state.</p>
+  <p>Unsigned objects.</p>
+  <p>UI restrictions treated as authority boundaries.</p>
+  <p>Object identifiers that were never expected to be modified because the application itself never offered a button for modifying them.</p>
+
+  <p>The mistake is deeper than “validate your inputs.”</p>
+
+  <p>Input validation matters, obviously.</p>
+
+  <p>But a state can be completely valid and still be illegitimate.</p>
+
+  <p>Suppose a protocol permits:</p>
+
+  <pre><code>A → B → C → D</code></pre>
+
+  <p>The server gives the client state B.</p>
+
+  <p>Later, the client presents D.</p>
+
+  <p>D may be a valid state.</p>
+
+  <p>The question is whether the system can establish that the permitted transition path occurred.</p>
+
+  <p>Now imagine:</p>
+
+  <pre><code>      B → C → D
+     /
+A ──
+     \
+      X ───→ D</code></pre>
+
+  <p>Seeing D tells you even less.</p>
+
+  <p>The current state may be valid.</p>
+
+  <p>It may also be reachable from multiple histories with very different meanings.</p>
+
+  <p>A valid state does not prove a valid history.</p>
+
+  <p>And if future decisions depend on knowing that history, then the protocol has a problem.</p>
+
+  <h2>Security Theater Begins at the End of the Question</h2>
+
+  <p>This is where I think security theater actually begins.</p>
+
+  <p>Not when someone deploys a security control.</p>
+
+  <p>Deploying SSH instead of Telnet is not theater.</p>
+  <p>Deploying TLS is not theater.</p>
+  <p>Using MFA is not theater.</p>
+
+  <p>Security theater begins when the existence of the control is used to stop further inquiry.</p>
+
+  <blockquote><p>We use SSH.</p></blockquote>
+
+  <p>Okay.</p>
+  <p>What threat are we discussing?</p>
+
+  <blockquote><p>The traffic is encrypted.</p></blockquote>
+
+  <p>Okay.</p>
+  <p>Against whom?</p>
+
+  <blockquote><p>We require MFA.</p></blockquote>
+
+  <p>Okay.</p>
+  <p>What happens after authentication?</p>
+
+  <blockquote><p>The service is behind a VPN.</p></blockquote>
+
+  <p>Okay.</p>
+  <p>What do you trust about the client that has connected?</p>
+
+  <p>A real security improvement says:</p>
+
+  <blockquote>
+    <p>We identified a threat and introduced a control that changes the attacker’s capabilities.</p>
+  </blockquote>
+
+  <p>Security theater says:</p>
+
+  <blockquote>
+    <p>We performed an action associated with security and have therefore entered the Secure State.</p>
+  </blockquote>
+
+  <p>There is no Secure State.</p>
+
+  <p>There are properties.</p>
+  <p>There are guarantees.</p>
+  <p>There are assumptions.</p>
+  <p>There are costs imposed on attackers.</p>
+  <p>There are things the system knows and things it merely believes.</p>
+
+  <p>The job is to keep those categories separate.</p>
+
+  <h2>Back to Wireshark</h2>
+
+  <p>That old Wireshark exercise was useful because it made one security property visible.</p>
+
+  <p>With Telnet, the observer could see the session contents.</p>
+
+  <p>With SSH, the observer could not trivially recover them from the packet capture.</p>
+
+  <p>That is a real change.</p>
+  <p>It is measurable.</p>
+  <p>It is useful.</p>
+  <p>It is defensible.</p>
+
+  <p>But the mature lesson is not:</p>
+
+  <blockquote><p>SSH is secure.</p></blockquote>
+
+  <p>The mature lesson is:</p>
+
+  <blockquote>
+    <p><strong>SSH changes the knowledge available to a particular observer under a particular threat model.</strong></p>
+  </blockquote>
+
+  <p>That sentence is less satisfying.</p>
+
+  <p>It does not fit on a compliance checkbox.</p>
+
+  <p>It does not give management a binary answer.</p>
+
+  <p>It is also much closer to how security actually works.</p>
+
+  <h2>The Weird Box in the Corner</h2>
+
+  <p>Looking back, a lot of my career has involved this same question in different forms.</p>
+
+  <p>I have often been the person sent to look at the weird box or binary in the corner that nobody quite understands.</p>
+
+  <p>An old Unix machine.</p>
+  <p>A Windows 98 system everyone believes is critical.</p>
+  <p>A piece of hospital infrastructure nobody wants to touch.</p>
+  <p>A malware sample.</p>
+
+  <p>The useful question is rarely:</p>
+
+  <blockquote><p>What is this supposed to be?</p></blockquote>
+
+  <p>It is:</p>
+
+  <blockquote><p>What does it actually do?</p></blockquote>
+
+  <p>What communicates with it?</p>
+  <p>What state does it maintain?</p>
+  <p>What assumptions do other systems make about it?</p>
+  <p>What happens if it disappears?</p>
+  <p>What behavior must be preserved?</p>
+  <p>What history matters?</p>
+  <p>What can be inferred from the current state, and what has already been lost?</p>
+
+  <p>A machine can become sacred because someone once said, “Do not touch this box,” and then disappeared.</p>
+
+  <p>Years later, everyone remembers the warning but nobody remembers the reason.</p>
+
+  <p>Eventually the organization is not protecting a known dependency.</p>
+
+  <p>It is protecting a myth.</p>
+
+  <p>Sometimes, once the system is actually understood, the requirement turns out to be much smaller:</p>
+
+  <blockquote>
+    <p>This executable needs to keep working at this IP address.</p>
+  </blockquote>
+
+  <p>That is a very different problem from:</p>
+
+  <blockquote>
+    <p>This exact physical machine must exist forever.</p>
+  </blockquote>
+
+  <p>Again, the useful work begins by separating what is known from what is assumed.</p>
+
+  <h2>The Question I Wish More Systems Asked</h2>
+
+  <p>Security is full of declarative statements.</p>
+
+  <p>Encrypted.</p>
+  <p>Authenticated.</p>
+  <p>Authorized.</p>
+  <p>Validated.</p>
+  <p>Trusted.</p>
+  <p>Secure.</p>
+
+  <p>The problem is that every one of those words is incomplete without context.</p>
+
+  <p>So I think the more useful habit is to keep asking:</p>
+
+  <blockquote><p><strong>What do I know?</strong></p></blockquote>
+  <blockquote><p><strong>What am I inferring?</strong></p></blockquote>
+  <blockquote><p><strong>What does the system actually prove?</strong></p></blockquote>
+
+  <p>And, when dealing with protocols:</p>
+
+  <blockquote><p><strong>Given this state, what can I determine about the future?</strong></p></blockquote>
+  <blockquote><p><strong>Given this state, what can I determine about the past?</strong></p></blockquote>
+  <blockquote><p><strong>Has the system preserved enough history to make the next decision correctly?</strong></p></blockquote>
+
+  <p>Because a parser can succeed while the application fails.</p>
+
+  <p>A message can be valid while the transition is invalid.</p>
+
+  <p>A state can be valid while the history is impossible.</p>
+
+  <p>A security control can work while the system remains vulnerable.</p>
+
+  <p>And a system can be more secure without ever becoming secure.</p>
+
+  <p>That is not a reason to stop improving it.</p>
+
+  <p>It is a reason to be precise about what each improvement actually gives you.</p>
+</article>
