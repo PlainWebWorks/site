@@ -178,21 +178,21 @@
   <p>That way of thinking naturally creates a stack.</p>
 
   <pre><code>bytes
-↓
+&#8595;
 decoded object
-↓
+&#8595;
 structurally valid object
-↓
+&#8595;
 semantically valid object
-↓
+&#8595;
 valid message
-↓
+&#8595;
 valid message at this point in the protocol
-↓
+&#8595;
 valid state transition
-↓
+&#8595;
 valid reachable state
-↓
+&#8595;
 sufficient history for the next decision</code></pre>
 
   <p>Success at one layer does not automatically prove the next.</p>
@@ -256,7 +256,7 @@ sufficient history for the next decision</code></pre>
 
   <p>Suppose a protocol permits:</p>
 
-  <pre><code>A → B → C → D</code></pre>
+  <pre><code>A &#8594; B &#8594; C &#8594; D</code></pre>
 
   <p>The server gives the client state B.</p>
 
@@ -268,11 +268,11 @@ sufficient history for the next decision</code></pre>
 
   <p>Now imagine:</p>
 
-  <pre><code>      B → C → D
+  <pre><code>      B &#8594; C &#8594; D
      /
-A ──
+A &#9472;&#9472;
      \
-      X ───→ D</code></pre>
+      X &#9472;&#9472;&#9472;&#8594; D</code></pre>
 
   <p>Seeing D tells you even less.</p>
 
